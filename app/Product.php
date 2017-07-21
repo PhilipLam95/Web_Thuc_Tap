@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Illuminate\Http\Request;
 
 class Product extends Model
 {
@@ -13,9 +14,8 @@ class Product extends Model
 
     public static function getProducts()  // lấy sản phẩm 
     {
-    	$products = DB::table('products')->orderBy('id','desc');
-    	return $products;
-
+        $products = DB::table('products')->orderBy('id','desc');
+        return $products;
     }
 
     
@@ -27,8 +27,8 @@ class Product extends Model
     }
     public static function getManyNewProducts() //lấy nhiều sản phẩm
     {
-    	$products = DB::table('products')->orderBy('id','desc');
-    	return $products;
+        $products = DB::table('products')->orderBy('id','desc');
+        return $products;
     }
 
     public static function findProDuctById($id) // chi tiết sản phẩm
@@ -38,7 +38,11 @@ class Product extends Model
             $view = $view +1;
 
          DB::table('products')->where('products.id','=',$id)->update(['view'=>$view]);
-        $products = DB::table('products')->where('products.id','=',$id);
+        $products = DB::table('products')->where('products.id','=',$id)
+                    ->join('import_product',function($query)
+                        {
+                            $query->on('products.id','=','import_product.id_product');
+                        });
         return $products;
     }
 
@@ -56,4 +60,33 @@ class Product extends Model
         return $products;
 
     }
+
+    public static function findCategoyy($id)
+    {
+         $category = DB::table('category')->where('category.id',$id)->select('id','name_type');
+         return $category;
+    }
+
+    public static function findTypeProDuct($id)// tim theo loai san pham
+    {
+        $products = DB::table('products')
+        ->join('import_product','products.id','=','import_product.id_product')
+        ->leftJoin('category','products.id_type','=','category.id')
+        ->where('products.id_type','=',$id);
+        return $products;
+    }
+
+    public static function findProductByIdPar($id)// tim san pham theo tung phong
+    {
+        $category = DB::table('category')->where('category.id',$id)->select('id')->get();
+        $category = $category[0]->id;
+        $products = DB::table('products')->where('products.id_par',$category)
+        ->join('import_product','products.id','=','import_product.id_product');
+    
+        
+        return $products;
+    
+    }
+
+    
 }

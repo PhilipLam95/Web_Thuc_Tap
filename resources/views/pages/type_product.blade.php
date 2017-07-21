@@ -1,24 +1,31 @@
 @extends('layouts.master')
 @section('noidung')
 
+		
+
+
 <div class="product-model">	 
 	 <div class="container">
 			<ol class="breadcrumb">
 		  <li><a href="index.html">Home</a></li>
-		  <li class="active">Sản Phẩm Mới</li>
+		  <li class="active">Sản Phẩm</li>
 		 </ol>
-			<h2 style="color:#662200;text-align: center;">SẢN PHẨM CỦA CHÚNG TÔI</h2>			
+
+	
+			<h2 style="color:#662200;text-align: center;">{{$categories->name_type}}</h2>
+	
+		
 		<div class="col-md-9 product-model-sec">
 					<a href="single.html"></a>
-					@foreach ($all_pros as $all_pro)
+					@foreach($products as $product)
 					<div class="product-grid love-grid">
-					 	<a href="{{route('detail',$all_pro->id_product)}}">
+					 	<a href="{{route('detail',$product->id_product)}}" >
 
 							<div class="more-product">
 								<span> </span>
 							</div>						
 							<div class="product-img b-link-stripe b-animate-go  thickbox">
-								<img src="images/{{$all_pro->image}}"  style="height:250px;width:200px" class="img-responsive" alt="">
+								<img src="images/{{ $product->image}}"  style="height:250px;width:200px" class="img-responsive" alt="">
 								<div class="b-wrapper">
 									<h4 class="b-animate b-from-left  b-delay03">							
 										<button class="btns">
@@ -29,9 +36,13 @@
 						</a>						
 						<div class="product-info simpleCart_shelfItem">
 							<div class="product-info-cust prt_name" >
-								<h4 style="color: #802b00">{{$all_pro->name}}</h4>
-								<p style="color: #802b00" >ID: {{$all_pro->id_product}}</p>
-								<span class="item_price" style="color: #802b00">{{number_format($all_pro->unit_price)}} VND</span>								
+								<h4 style="color: #802b00">{{ $product->name}}</h4>
+								<p style="color: #802b00" >ID:{{ $product->id}} </p>
+								@if($product->unit_price!=0)
+								<span class="item_price" style="color: #802b00">{{number_format($product->unit_price)}}VND</span>
+								@else
+								<p >GIá liên hệ:<a style="color:red"> 0985668449</a></p>	
+								@endif							
 								<input class="item_quantity" value="1" type="text">
 								<a href="single.html"><input class="item_add items" value="ADD" type="button"></a>
 							</div>													
@@ -46,7 +57,7 @@
 						<a href="single.html">
 							<div class="more-product">
 								<span> </span>
-							</div>					
+							</div>						
 							<div class="product-img b-link-stripe b-animate-go  thickbox">
 								<img src="images/p2.jpg" class="img-responsive" alt="">
 									<div class="b-wrapper">
@@ -68,27 +79,62 @@
 						</div>
 					</div> -->
 					
-			<div  class="col-md-9 product-model-sec">{{$all_pros->links() }} </div>		
+			<div  class="col-md-9 product-model-sec">{{$products->links() }} </div>	
+		<?php  
+
+								 	function subMen($data,$id)
+									{
+											echo "<div class='single-bottom' style='display: none;'";
+											foreach($data as $items)
+											{
+												if($items->parent_id == $id)
+												{
+												echo '<a ><p style="left:0px;text-align:center" href="aasdsadsa">'.$items->name_type.'</p>';
+							         			subMen($data,$items->id);
+							          			echo "</a>";
+													
+												}
+
+											}
+
+											echo "</div>";
+
+									}
+
+		?>	
 		</div>
 		
 			<div class="rsidebar span_1_of_left">
 				 <section class="sky-form">
 					 <div class="product_right">
-						 <h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Categories</h4>
-						 <div class="tab1">
+						 <h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>DANH MỤC ĐỒ GỖ</h4>
+						 <?php $type= App\TypeProduct::getTypeProDuct()->get()->toArray();?>
+						 @foreach($type as $items)
+						 @if($items->parent_id == 1)
+						 <div class="tab{{$items->id}}">
 							 <ul class="place">								
-								 <li class="sort">Furniture</li>
+								 <li class="sort">{{ $items->name_type}}</li>
 								 <li class="by"><img src="images/do.png" alt=""></li>
+								 
 									<div class="clearfix"> </div>
+									<?php 
+								 	 	subMen($type,$items->id);
+									?>
+
 							  </ul>
-							 <div class="single-bottom" style="display: none;">						
+							  
+							  
+							 <!-- <div class="single-bottom" style="display: none;">						
 									<a href="#"><p>Sofas</p></a>
 									<a href="#"><p>Fabric Sofas</p></a>
 									<a href="#"><p>Love Seats</p></a>
 									<a href="#"><p>Dinning Sets</p></a>
-						     </div>
-					      </div>						  
-						  <div class="tab2">
+						     </div> -->
+					      </div>
+					      @endif
+					      @endforeach
+					     				  
+						 <!--  <div class="tab2">
 							 <ul class="place">								
 								 <li class="sort">Decor</li>
 								 <li class="by"><img src="images/do.png" alt=""></li>
@@ -100,8 +146,8 @@
 									<a href="#"><p>Curios</p></a>
 									<a href="#"><p>Ash Trays</p></a>
 						     </div>
-					      </div>
-						  <div class="tab3">
+					      </div> -->
+						<!--   <div class="tab3">
 							 <ul class="place">								
 								 <li class="sort">Lighting</li>
 								 <li class="by"><img src="images/do.png" alt=""></li>
@@ -139,7 +185,7 @@
 									<a href="#"><p>Beds</p></a>
 									<a href="#"><p>Relax Chairs</p></a>
 						     </div>
-					      </div>
+					      </div> -->
 						  
 						  <!--script-->
 						<script>

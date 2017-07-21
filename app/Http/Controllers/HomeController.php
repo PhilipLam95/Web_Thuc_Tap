@@ -15,28 +15,28 @@ class HomeController extends Controller
     //
     public function getIndex()
    {
-	   	$slides= Slide::showslide()->orderBy('id','DESC')->limit(5)->get();// slider
+      $slides= Slide::showslide()->orderBy('id','DESC')->limit(5)->get();// slider
 
-	   	$products = Product::getProducts()->limit(6)->get();// lấy 6 sản phẩm mới nhất
+      $products = Product::getProducts()->limit(6)->get();// lấy 6 sản phẩm mới nhất
 
       $best_pros = Product:: findProDuctBestSale()->limit(8)->get();// lấy 8 sản 1phẩm bán nhiều nhất
 
       
       $best_views = Product::findProducBestFeature()->limit(10)->get();
 
-	    return view('pages.home',['slides'=>$slides,'products'=>$products,'best_pros'=>$best_pros,'best_views'=>$best_views]);
+      return view('pages.home',['slides'=>$slides,'products'=>$products,'best_pros'=>$best_pros,'best_views'=>$best_views]);
 
-	}
+  }
 
-	public function getContact()
-	{
-		return view('pages.contact');
+  public function getContact()
+  {
+    return view('pages.contact');
 
-	}
+  }
    
    public function getIntroduce()
    {
-   		return view('pages.introduce');
+      return view('pages.introduce');
 
    }
 
@@ -44,7 +44,7 @@ class HomeController extends Controller
    {
       $all_pros = Product::findAllProduct()->paginate(9);
 
-   		return view('pages.product',['all_pros'=>$all_pros]);
+      return view('pages.product',['all_pros'=>$all_pros]);
    }
 
    public function getDetail($id)

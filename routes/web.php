@@ -31,3 +31,26 @@ Route::get('detail/{id}',
 	['as'=>'detail',
 	'uses'=>'HomeController@getDetail']);
 
+Route::get('type/{id}',
+	['as'=>'type',
+	'uses'=>'ProductController@getTypeProDuct']);
+
+Route::get('type_par/{id}',
+	['as'=>'type_par',
+	'uses'=>'ProductController@getTypeProDuctByIdPar']);
+
+Route::get('register',
+	['as'=>'register',
+	'uses'=>'UserController@Register']);// dang ki
+
+Route::post('register',
+	['as'=>'register',
+	'uses'=>'UserController@postRegister']);// dang ki
+
+Route::get('login',
+	['as'=>'login',
+	'uses'=>'UserController@getlogin']);// dang nhap
+
+
+
+

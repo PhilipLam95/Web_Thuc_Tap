@@ -7,9 +7,9 @@
 				{
 					if($items->parent_id == $id)
 					{
-					echo "<li  ><a style='color:#b33c00' href=''> ".$items->name." </a>";
-					subMenu($data,$items->id);
-					echo "</li>";
+					echo '<li  ><a style="color:#b33c00" href="/../../Web_Thuc_Tap/public/type/'.$items->id.'"> '.$items->name_type.' </a>';
+          subMenu($data,$items->id);
+          echo "</li>";
 						
 					}
 
@@ -55,7 +55,7 @@
        </div>
        <div class="header_right"> 
          <div class="login">
-           <a href="login.html">LOGIN</a>
+           <a href="{{ route('login')}}">LOGIN</a>
          </div>
          <div class="cart box_1">
           <a href="cart.html">
@@ -73,64 +73,66 @@
        <div class="menu_sec">
        <!-- start header menu -->
        <ul class="megamenu skyblue" >
-         <li class="active grid"><a class="color1" href="{{route('index')}}">TRANG CHỦ</a></li>
-         <li class="grid"><a class="color2" href="{{route('new_product')}}">TẤT CẢ SẢN PHẨM</a>
+         <li class="grid1"><a class="color1" href="{{route('index')}}">TRANG CHỦ</a></li>
+         <li class="grid2">
+            <a class="color2" href="{{route('new_product')}}">TẤT CẢ SẢN PHẨM</a> 
           </li>
-        	<li><a class="color4" href="#">SẢN PHẪM GỖ PHÙ HỢP</a>
-          <div class="megapanel">
+        	<li class="grid3 "><a class="color4" >SẢN PHẪM GỖ PHÙ HỢP</a>
+            <div class="megapanel">
 
-            <div class="row" style="text-align: center">
-          <?php $type= App\TypeProduct::getTypeProDuct()->get()->toArray(); ?>
-          
-          	@foreach($type as $items)
-              <div class="col1">
-                <div class="h_nav">
-                 
-  	             @if($items->parent_id == 1)
-  	                <h4 href="{{route('index')}}" style="color:#993300"> {!! $items->name !!} 
-  	                	<?php 
-  	                	    subMenu($type,$items->id);
-  	
-  	                	 ?>
-  	                </h4>
-  	             @endif
-  	     
-  	               
+              <div class="row" style="text-align: center">
+                <?php $type= App\TypeProduct::getTypeProDuct()->get()->toArray();?>
+              	@foreach($type as $items)
+                  <div class="col1">
+                    <div class="h_nav">
+                     
+        	             @if($items->parent_id == 1)
+        	               <h4 style="color:#993300"><a  href="{!! url('type_par/'.$items->id)!!}" style="color:#802b00;font-weight: bolder;">{!! $items->name_type !!} </a> 
+                           
+                            <?php 
+                              subMenu($type,$items->id);
+                             ?>
+        	                	    
+
+        	                </h4>
+        	             @endif
+    	     
+    	               
 
 
-  			             
-                </div>              
-              </div>
-               @endforeach
+    			             
+                    </div>              
+                  </div>
+                @endforeach
          
             
-              <!-- <div class="col1">
-                <div class="h_nav">
-                  <h4>Tables</h4>
-                  <ul>
-                    <li><a href="products.html">Coffee Tables</a></li>
-                    <li><a href="products.html">Dinning Tables</a></li>
-                    <li><a href="products.html">Study Tables</a></li>
-                    <li><a href="products.html">Wooden Tables</a></li>
-                    <li><a href="products.html">Study Tables</a></li>
-                    <li><a href="products.html">Bar & Unit Stools</a></li>
-                  </ul> 
-                </div>              
-              </div>-->
+                <!-- <div class="col1">
+                  <div class="h_nav">
+                    <h4>Tables</h4>
+                    <ul>
+                      <li><a href="products.html">Coffee Tables</a></li>
+                      <li><a href="products.html">Dinning Tables</a></li>
+                      <li><a href="products.html">Study Tables</a></li>
+                      <li><a href="products.html">Wooden Tables</a></li>
+                      <li><a href="products.html">Study Tables</a></li>
+                      <li><a href="products.html">Bar & Unit Stools</a></li>
+                    </ul> 
+                  </div>              
+                </div>-->
          
-            </div>
-            <div class="row">
-              <div class="col2"></div>
-              <div class="col1"></div>
-              <div class="col1"></div>
-              <div class="col1"></div>
-              <div class="col1"></div>
-            </div>
               </div>
+              <div class="row">
+                <div class="col2"></div>
+                <div class="col1"></div>
+                <div class="col1"></div>
+                <div class="col1"></div>
+                <div class="col1"></div>
+              </div>
+            </div>
           </li>       
-          <li><a class="color5" href="#">TIN TỨC</a>
+          <li class="grid4"><a class="color5" href="#">TIN TỨC</a>
           </li>
-          <li><a class="color6" href="{{route('introduce')}}">GIỚI THIỆU</a>
+          <li class="grid5"><a class="color6" href="{{route('introduce')}}">GIỚI THIỆU</a>
           </li>       
         
              
@@ -149,7 +151,91 @@
   </div>
 </div>
 
+<script type="text/javascript">
+ $(document).ready(function () {
+    $('.grid1').click(function() {
+       $(window).load(function() 
+      {
+        $('.grid2').removeClass('active');
+        $('.grid3').removeClass('active');
+        $('.grid4').removeClass('active');
+        $('.grid5').removeClass('active');
 
+        var $this = $(this);
+        if (!$this.hasClass('active')) {
+            $this.addClass('active');
+        }
+      });
+        //e.preventDefault();
+    });
+
+    $('.grid2').click(function() {
+      $(window).load(function() 
+      {
+        var $this = $(this);
+        if (!$this.hasClass('active')) 
+        {
+          $this.addClass('active');
+        }
+        $('.grid1').removeClass('active');
+        $('.grid3').removeClass('active');
+        $('.grid4').removeClass('active');
+        $('.grid5').removeClass('active');
+
+
+      });
+       
+    });
+
+    $('.grid3').click(function() {
+      $(window).load(function() 
+      {
+        $('.grid1').removeClass('active');
+        $('.grid2').removeClass('active');
+        $('.grid4').removeClass('active');
+        $('.grid5').removeClass('active');
+
+        var $this = $(this);
+        if (!$this.hasClass('active')) {
+            $this.addClass('active');
+        }
+      });
+        //e.preventDefault();
+    });
+
+    $('.grid4').click(function() {
+      $(window).load(function() 
+      {
+        $('.grid1').removeClass('active');
+        $('.grid2').removeClass('active');
+        $('.grid3').removeClass('active');
+        $('.grid5').removeClass('active');
+
+        var $this = $(this);
+        if (!$this.hasClass('active')) {
+            $this.addClass('active');
+        }
+      });
+        //e.preventDefault();
+    });
+
+    $('.grid5').click(function() {
+      $(window).load(function() 
+      {
+        $('.grid1').removeClass('active');
+        $('.grid2').removeClass('active');
+        $('.grid3').removeClass('active');
+        $('.grid4').removeClass('active');
+
+        var $this = $(this);
+        if (!$this.hasClass('active')) {
+            $this.addClass('active');
+        }
+      });
+        //e.preventDefault();
+    });
+});
+</script>
 <!---->
 
 

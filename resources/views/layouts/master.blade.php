@@ -10,7 +10,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <title>Furnyish Store a Ecommerce Category Flat Bootstarp Responsive Website Template | Home :: w3layouts</title>
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 
-<base href="{{asset('http://localhost/laravel/public/') }}"/>
+<base href="{{asset('http://localhost/Web_Thuc_Tap/public/') }}"/>
 
 
 <link href="css/style.css" rel='stylesheet' type='text/css' />
@@ -31,10 +31,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="css/form.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
- @include('script')
+
+
+@include('script')
 
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
-
+<script src="js/menu_jquery.js"></script>
+<script src="js/simpleCart.min.js"> </script>
+<script src="js/responsiveslides.min.js"></script>
 <script>
     // You can also use "$(window).load(function() {"
     $(function () {

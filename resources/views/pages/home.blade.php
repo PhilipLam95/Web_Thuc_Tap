@@ -50,7 +50,7 @@
 			     <div class="new-items">
 			    
 						 <div class="item{{$products[$j]->id}}">
-							 <a href="{{ url('/detail/'.$products[$j]->id) }}"><img id="zoom_01" src="images/{{$products[$j]->image}}" alt=""></a>
+							 <a href="{{ url('/detail/'.$products[$j]->id) }}"><img src="images/{{$products[$j]->image}}" alt=""></a>
 							 <div class="item-info">
 								 <h4><a href="{{ url('/detail/'.$products[$j]->id) }}">{{$products[$j]->name}}</a></h4>
 								 <span>ID: {{$products[$j]->id}}</span>
@@ -59,7 +59,7 @@
 						 </div>
 					@php $j++ @endphp	
 						 <div class="item{{$products[$j]->id}}">
-							 <a href="{{ url('/detail/'.$products[$j]->id) }}"><img id="zoom_01" src="images/{{$products[$j]->image}}" alt=""></a>
+							 <a href="{{ url('/detail/'.$products[$j]->id) }}"><img src="images/{{$products[$j]->image}}" alt=""></a>
 							 <div class="item-info">
 								 <h4><a href="{{ url('/detail/'.$products[$j]->id) }}">{{$products[$j]->name}}</a></h4>
 								 <span>ID: {{$products[$j]->id}}</span>
@@ -76,11 +76,11 @@
 							 <span>ID: {{$products[$j]->id}}</span>
 							<a href="{{ url('/detail/'.$products[$j]->id) }}" style="background: url('background/color.jpg')">Chi tiết</a>
 						 </div>
-						 <a href="{{ url('/detail/'.$products[$j]->id) }}" ><img id="zoom_01" src="images/{{$products[$j]->image}}" alt=""></a>
+						 <a href="{{ url('/detail/'.$products[$j]->id) }}" ><img src="images/{{$products[$j]->image}}" alt=""></a>
 					 </div>
 					 @php $j++ @endphp
 					 <div class="item{{$products[$j]->id}}">	
-						 <a href="{{ url('/detail/'.$products[$j]->id) }}"><img id="zoom_01" src="images/{{$products[$j]->image}}" alt=""></a>
+						 <a href="{{ url('/detail/'.$products[$j]->id) }}"><img src="images/{{$products[$j]->image}}" alt=""></a>
 						 <div class="item-info5">
 							 <h4><a href="{{ url('/detail/'.$products[$j]->id) }}">{{$products[$j]->name}}</a></h4>
 							 <span>ID: {{$products[$j]->id}}</span>
@@ -92,7 +92,7 @@
 		 		@if($j==4)
 		 		<div class="new-items new_last">
 					 <div class="item{{$products[$j]->id}}">	
-						 <a href="{{ url('/detail/'.$products[$j]->id) }}"><img id="zoom_01" src="images/{{$products[$j]->image}}" alt=""></a>
+						 <a href="{{ url('/detail/'.$products[$j]->id) }}"><img src="images/{{$products[$j]->image}}" alt=""></a>
 						 <div class="item-info3">
 							 <h4><a href="{{ url('/detail/'.$products[$j]->id) }}">{{$products[$j]->name}}</a></h4>
 							 <span>ID: {{$products[$j]->id}}</span>
@@ -101,7 +101,7 @@
 					 </div>
 					  @php $j++ @endphp
 					 <div class="item{{$products[$j]->id}}">	
-						 <a href="{{ url('/detail/'.$products[$j]->id) }}"><img id="zoom_01" src="images/{{$products[$j]->image}}" alt=""></a>
+						 <a href="{{ url('/detail/'.$products[$j]->id) }}"><img src="images/{{$products[$j]->image}}" alt=""></a>
 						 <div class="item-info6">
 							 <h4><a href="{{ url('/detail/'.$products[$j]->id) }}">{{$products[$j]->name}}</a></h4>
 							 <span>ID: {{$products[$j]->id}}</span>
@@ -115,9 +115,6 @@
 			
 			     
 			@endfor	
-			<script type="text/javascript">
-				 $("#zoom_01").elevateZoom();
-			</script>
 			   
 			        
 			     
@@ -125,14 +122,17 @@
 		     </div>
 		   </div>    
 		</div>
+		<style type="text/css">
+
+		</style>
 		<!---->
-		<div class="top-sellers">
+		<div class="top-sellers"> 
 		   <div class="container">
 		     <h3 style="color:#4d1a00">SẢN PHẨM BÁN NHIỀU NHẤT</h3>
 		     <div class="seller-grids">
 		     @foreach($best_pros as $best_pro)
 		       <div class="col-md-3 seller-grid" style="padding-bottom: 30px">
-		         <a href="products.html"><img id="zoom_01" style="height:150px;width: 150px" src="images/{{$best_pro->image}}" alt=""/></a>
+		         <a href="{{route('detail',$best_pro->id_product)}}"><img  style="height:150px;width: 150px" src="images/{{$best_pro->image}}" alt=""/></a>
 		         	<div style="color:#4d1a00;">
 				         <h4><a   href="products.html">{{$best_pro->name}}</a></h4>
 				         <span>ID: {{$best_pro->id_product}}</span>
@@ -141,6 +141,7 @@
 				         @else
 				         <p>{{number_format($best_pro->unit_price)}} VND</p>
 				         @endif
+				         <a class="add-cart" href="" style="">Mua Ngay</a>
 			        </div>
 		       </div>
 		     @endforeach
@@ -168,6 +169,8 @@
 		           	@else
 		           		<p> GIá liên hệ:<a style="color: red">0985668449 </a></p>
 		           	@endif
+		           	<p href="">Mua Ngay</p>
+
 		         </li>
 		       @endforeach
 		         <!-- <li>
@@ -221,5 +224,6 @@
 		   </div>
 		   </div>
 		</div>
+		<form></form>
 		
 @endsection

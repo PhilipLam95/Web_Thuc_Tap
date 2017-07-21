@@ -1,5 +1,26 @@
 @extends('layouts.master')
 @section('noidung')
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+<!--etalage-->
+
+<script src="js/jquery.etalage.min.js"></script>
+<script>
+			jQuery(document).ready(function($){
+
+				$('#etalage').etalage({
+					thumb_image_width: 300,
+					thumb_image_height: 400,
+					source_image_width: 900,
+					source_image_height: 1200,
+					show_hint: true,
+					click_callback: function(image_anchor, instance_id){
+						alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+					}
+				});
+
+			});
+</script>
 
 <div class="single-sec">
 	 <div class="container">
@@ -9,76 +30,43 @@
 		 </ol>
 		 <!-- start content -->	
 			<div class="col-md-9 det">
-				<div class="single_left">
+				  <div class="single_left">
 					 <div class="grid images_3_of_2">
-					 	
-							 <ul id="etalage" class="etalage" style="display: block; width: 300px; height: 533px;">
-							<!-- 		<li class="etalage_thumb thumb_1" style="display: none; opacity: 0;">
-										<a href="optionallink.html">
-											<img class="etalage_thumb_image" src="images/{{ $products->image }}" style="display: inline; width: 300px; height: 400px; opacity: 1;">
-											<img class="etalage_source_image" src="images/{{ $products->image }}" title="">
-										</a>
-									</li> -->
-									<li class="etalage_thumb thumb_2 " style="display: list-item; opacity: 1;">
-										<img class="etalage_thumb_image" src="images/{{ $products->image }}" style="display: inline; width: 300px; height: 400px;">
-										<img class="etalage_source_image" src="images/{{ $products->image }}" title="">
-									</li>							
-								    
-									<!-- <li class="etalage_magnifier" style="margin: 0px; padding: 0px; left: 24px; top: 221px; display: none; opacity: 0.173503;">
-									 	<div style="margin: 0px; padding: 0px; width: 200px; height: 178px;">
-									 		<img style="margin: 0px; padding: 0px; width: 300px; height: 400px; display: inline; left: -25px; top: -222px;" src="images/{{ $products->image }}">
-									 	</div>
-									</li> -->
-
-							 		<!-- <li class="etalage_icon" style="display: list-item; top: 276px; left: 20px; opacity: 1;">&nbsp;</li>
-
-							 		<li class="etalage_hint" style="display: none; margin: 0px; top: -15px; right: -15px;">&nbsp;</li>
-
-									<li class="etalage_zoom_area" style="margin: 0px; opacity: 0; left: 310px; display: none;">
-										<div class="etalage_description" style="width: 560px; bottom: 0px; left: 0px; opacity: 0.7; display: none;">
-									 		
-									 	</div>
-
-									 	<div style="width: 600px; height: 533px;">
-									 		<img class="etalage_zoom_preview" style="width: 900px; height: 1200px; opacity: 0.3; display: inline; left: -27.4494px; top: -654.303px;" src="images/{{ $products->image }}"><img class="etalage_zoom_img" style="width: 900px; height: 1200px; left: -27.4494px; top: -654.303px;" src="images/{{ $products->image }}">
-									 	</div>
-									</li> -->
-
-							 		<!-- <li class="etalage_small_thumbs" style="width: 300px; top: 410px;">
-								 		<ul style="width: 410px;">
-										 	<li style="opacity: 0.4; margin: 0px 10px 0px 0px;" class=""><img class="etalage_small_thumb" src="images/{{ $products->image }}" style="width: 91px; height: 121px;" width="91">
-										 	</li>
-
-										 	<li style="opacity: 1; margin: 0px 11px 0px 0px;" class="etalage_smallthumb_active">
-										 		<img class="etalage_small_thumb" src="images/{{ $products->image }}" style="width: 91px; height: 121px;" width="91">
-										 	</li>
-
-										 	<li style="opacity: 0.4; margin: 0px 10px 0px 0px;" class="">
-										 		<img class="etalage_small_thumb" src="images/{{ $products->image }}" style="width: 91px; height: 121px;" width="91">
-										 	</li>
-										 </ul>
-									</li> -->
-							</ul>
-						
-							<div class="clearfix"></div>		
-				    </div>
-				</div>
+						 <ul id="etalage">
+							<li>
+								<a href="optionallink.html">
+									<img class="etalage_thumb_image" src="images/{{$products->image}}" class="img-responsive" />
+									<img class="etalage_source_image" src="images/{{$products->image}}" class="img-responsive" title="" />
+								</a>
+							</li>
+							<li>
+								<img class="etalage_thumb_image" src="images/{{$products->image2}}" class="img-responsive" />
+								<img class="etalage_source_image" src="images/{{$products->image2}}" class="img-responsive" title="" />
+							</li>							
+						    <li>
+								<img class="etalage_thumb_image" src="images/{{$products->image3}}" class="img-responsive"  />
+								<img class="etalage_source_image" src="images/{{$products->image3}}" class="img-responsive"  />
+							</li>
+						 </ul>
+						 <div class="clearfix"></div>		
+				      </div>
+				  </div>
 				  <div class="single-right">
-					 <h3>{{$products->name}}</h3>
-					 <div class="id"><h4>ID: {{$products->id}}</h4></div>
+					 <h3>{{ $products->name}}</h3>
+					 <div class="id"><h4>ID: {{$products->id_product}}</h4></div>
 					  <form action="" class="sky-form">
 						     <fieldset>					
 							   <section>
 							     <div class="rating">
-									<input name="stars-rating" id="stars-rating-5" type="radio">
+									<input type="radio" name="stars-rating" id="stars-rating-5">
 									<label for="stars-rating-5"><i class="icon-star"></i></label>
-									<input name="stars-rating" id="stars-rating-4" type="radio">
+									<input type="radio" name="stars-rating" id="stars-rating-4">
 									<label for="stars-rating-4"><i class="icon-star"></i></label>
-									<input name="stars-rating" id="stars-rating-3" type="radio">
+									<input type="radio" name="stars-rating" id="stars-rating-3">
 									<label for="stars-rating-3"><i class="icon-star"></i></label>
-									<input name="stars-rating" id="stars-rating-2" type="radio">
+									<input type="radio" name="stars-rating" id="stars-rating-2">
 									<label for="stars-rating-2"><i class="icon-star"></i></label>
-									<input name="stars-rating" id="stars-rating-1" type="radio">
+									<input type="radio" name="stars-rating" id="stars-rating-1">
 									<label for="stars-rating-1"><i class="icon-star"></i></label>
 									<div class="clearfix"></div>
 								 </div>
@@ -88,23 +76,30 @@
 					  <div class="cost">
 						 <div class="prdt-cost">
 							 <ul>
-								 <li>MRP: <del>Rs 55000</del></li>								 
+								 <li>Chất liệu: <a1>{{$products->Materia}}</a1></li>								 
 								 <li>Sellling Price:</li>
-								 @if($products->unit_price!=0)
+								 @if($products->unit_price !=0)
 								 <li class="active">{{number_format($products->unit_price)}} VND</li>
-								 @else
-								 <li class="active"> Gía liên Hệ:{{$products->contact_price}}</li>
+								 @else 
+								  <h3> 
+								  	Gía liên hệ :<li class="active"><a1 style="color: red">0985668449</a1></li>
+								  </h3>
 								 @endif
 								 <a href="#">BUY NOW</a>
 							 </ul>
 						 </div>
 						 <div class="check">
-							 <p><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Enter pin code for delivery &amp; availability</p>
+						 	@if($products->unit_price!=0)
+							 <p>
+							 	<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+							 	<a> Số lượng còn: </a>
+							 </p>
+							@endif
 							 <form class="navbar-form navbar-left" role="search">
 								  <div class="form-group">
-									<input class="form-control" placeholder="Enter Pin code" type="text">
+									<input type="text" class="form-control" placeholder="{{$products->import_quantity}}">
 								  </div>
-								  <button type="submit" class="btn btn-default">Verify</button>
+								 
 							 </form>
 						 </div>
 						 <div class="clearfix"></div>
@@ -125,7 +120,7 @@
 				  </div>
 				  <div class="clearfix"></div>
 				  <div class="sofaset-info">
-						 <h4>Product Summary SPENCER 3+1+1 SOFA SET WITH 5 BIG CUSHIONS &amp; WOODEN HANDLE</h4>
+						 <h4>Product Summary SPENCER 3+1+1 SOFA SET WITH 5 BIG CUSHIONS & WOODEN HANDLE</h4>
 						 <ul>
 							 <li>Dimensions: 3 Seater: Length 208 x Width 81 x Height 91.5 cm and 1 Seater: Length 99 x Width 81 x Height 91.5 cm</li>
 							 <li>Assembly Type: Pre Assembled</li>
@@ -143,7 +138,7 @@
 				  </div>				  					
 		    </div>
 			<div class="rsidebar span_1_of_left">
-				<section class="sky-form">
+				<section  class="sky-form">
 					 <div class="product_right">
 						 <h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Categories</h4>
 						 <div class="tab1">
@@ -152,7 +147,7 @@
 								 <li class="by"><img src="images/do.png" alt=""></li>
 									<div class="clearfix"> </div>
 							  </ul>
-							 <div class="single-bottom" style="display: none;">						
+							 <div class="single-bottom">						
 									<a href="#"><p>Sofas</p></a>
 									<a href="#"><p>Fabric Sofas</p></a>
 									<a href="#"><p>Love Seats</p></a>
@@ -165,7 +160,7 @@
 								 <li class="by"><img src="images/do.png" alt=""></li>
 									<div class="clearfix"> </div>
 							  </ul>
-							 <div class="single-bottom" style="display: none;">						
+							 <div class="single-bottom">						
 									<a href="#"><p>Shelves</p></a>
 									<a href="#"><p>Wall Racks</p></a>
 									<a href="#"><p>Curios</p></a>
@@ -178,7 +173,7 @@
 								 <li class="by"><img src="images/do.png" alt=""></li>
 									<div class="clearfix"> </div>
 							  </ul>
-							 <div class="single-bottom" style="display: none;">						
+							 <div class="single-bottom">						
 									<a href="#"><p>Table Lamps</p></a>
 									<a href="#"><p>Tube Lights</p></a>
 									<a href="#"><p>Study Lamps</p></a>
@@ -187,11 +182,11 @@
 					      </div>
 						  <div class="tab4">
 							 <ul class="place">								
-								 <li class="sort">Bed &amp; Bath</li>
+								 <li class="sort">Bed & Bath</li>
 								 <li class="by"><img src="images/do.png" alt=""></li>
 									<div class="clearfix"> </div>
 							  </ul>
-							 <div class="single-bottom" style="display: none;">						
+							 <div class="single-bottom">						
 									<a href="#"><p>Towels</p></a>
 									<a href="#"><p>Bath Roles</p></a>
 									<a href="#"><p>Mirrors</p></a>
@@ -204,7 +199,7 @@
 								 <li class="by"><img src="images/do.png" alt=""></li>
 									<div class="clearfix"> </div>
 							  </ul>
-							 <div class="single-bottom" style="display: none;">						
+							 <div class="single-bottom">						
 									<a href="#"><p>Sofas</p></a>
 									<a href="#"><p>Fabric Sofas</p></a>
 									<a href="#"><p>Beds</p></a>
@@ -259,34 +254,34 @@
 							});
 						</script>
 						<!-- script -->					 
-				 </div></section>
-				 <section class="sky-form">
+				 </section>
+				 <section  class="sky-form">
 					 <h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>DISCOUNTS</h4>
 					 <div class="row row1 scroll-pane">
 						 <div class="col col-4">
-								<label class="checkbox"><input name="checkbox" checked="" type="checkbox"><i></i>Upto - 10% (20)</label>
+								<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Upto - 10% (20)</label>
 						 </div>
 						 <div class="col col-4">
-								<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>40% - 50% (5)</label>
-								<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>30% - 20% (7)</label>
-								<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>10% - 5% (2)</label>
-								<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>Other(50)</label>
+								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>40% - 50% (5)</label>
+								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>30% - 20% (7)</label>
+								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>10% - 5% (2)</label>
+								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Other(50)</label>
 						 </div>
 					 </div>
 				 </section> 				  
-				 <section class="sky-form">
+				 <section  class="sky-form">
 						<h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Price</h4>
 							<ul class="dropdown-menu1">
 								 <li><a href="">								                
 								<div id="slider-range"></div>							
-								<input id="amount" style="border: 0; font-weight: NORMAL;   font-family: 'Arimo', sans-serif;" type="text">
+								<input type="text" id="amount" style="border: 0; font-weight: NORMAL;   font-family: 'Arimo', sans-serif;" />
 							 </a></li>			
 						  </ul>
 				   </section>
 				   <!---->
 					 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 					 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
-					<script type="text/javascript">//<![CDATA[ 
+					<script type='text/javascript'>//<![CDATA[ 
 					$(window).load(function(){
 					 $( "#slider-range" ).slider({
 								range: true,
@@ -301,42 +296,43 @@
 					});//]]>  
 
 					</script>
-					<section class="sky-form">
+					<section  class="sky-form">
 						<h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Type</h4>
 							<div class="row row1 scroll-pane">
 								<div class="col col-4">
-									<label class="checkbox"><input name="checkbox" checked="" type="checkbox"><i></i>Sofa Cum Beds (30)</label>
+									<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Sofa Cum Beds (30)</label>
 								</div>
 								<div class="col col-4">
-									<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>Dinner Sets   (30)</label>
-									<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>3+1+1 Sofa Sets (30)</label>
-									<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>Sofa Chairs     (30)</label>
-									<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>2 Seater Sofas  (30)</label>
-									<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>Display Units   (30)</label>
-									<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>L-shaped Sofas  (30)</label>
-									<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>3 Seater Sofas  (30)</label>
+									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Dinner Sets   (30)</label>
+									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>3+1+1 Sofa Sets (30)</label>
+									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Sofa Chairs     (30)</label>
+									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>2 Seater Sofas  (30)</label>
+									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Display Units   (30)</label>
+									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>L-shaped Sofas  (30)</label>
+									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>3 Seater Sofas  (30)</label>
 								</div>
 							</div>
 				   </section>
-				 <section class="sky-form">
+				 <section  class="sky-form">
 						<h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Brand</h4>
 							<div class="row row1 scroll-pane">
 								<div class="col col-4">
-									<label class="checkbox"><input name="checkbox" checked="" type="checkbox"><i></i>Roadstar</label>
+									<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Roadstar</label>
 								</div>
 								<div class="col col-4">
-									<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>Tornado</label>
-									<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>Kissan</label>
-									<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>Oakley</label>
-									<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>Manga</label>
-									<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>Wega</label>
-									<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>Kings</label>
-									<label class="checkbox"><input name="checkbox" type="checkbox"><i></i>Zumba</label>
+									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Tornado</label>
+									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Kissan</label>
+									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Oakley</label>
+									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Manga</label>
+									<label class="checkbox"><input type="checkbox" name="checkbox" ><i></i>Wega</label>
+									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Kings</label>
+									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Zumba</label>
 								</div>
 							</div>
 				   </section>			  									 			 
 			   </div>
 		</div>	     				
 		     <div class="clearfix"></div>
-	  </div>
+	  </div>	 
+</div>
 @endsection

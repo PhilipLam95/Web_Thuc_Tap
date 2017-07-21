@@ -18,4 +18,10 @@ class TypeProduct extends Model
     	return $type;
 
     }
+
+    public static function findTypeProductByIdPar()
+    {
+    	$type = DB::table('category')->where('category.parent_id',1);
+    	return $type;
+    }
 }

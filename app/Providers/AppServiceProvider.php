@@ -21,6 +21,12 @@ class AppServiceProvider extends ServiceProvider
               $types =  TypeProduct::getTypeProDuct()->get()->toArray();   
               $view->with(['types'=>$types]);
           });
+
+        // view()->composer('pages.type_product',function($view){
+        //         $type_chas=TypeProduct::findTypeProductByIdPar()->get();
+               
+        //         $view->with('type_chas',$type_chas);
+        // });
     }
 
     /**
