@@ -14,25 +14,31 @@ return [
     |
     */
 
-    'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
-    ],
+        'mailgun' => [
+            'domain' => env('MAILGUN_DOMAIN'),
+            'secret' => env('MAILGUN_SECRET'),
+        ],
 
-    'ses' => [
-        'key' => env('SES_KEY'),
-        'secret' => env('SES_SECRET'),
-        'region' => 'us-east-1',
-    ],
+        'ses' => [
+            'key' => env('SES_KEY'),
+            'secret' => env('SES_SECRET'),
+            'region' => 'us-east-1',
+        ],
 
-    'sparkpost' => [
-        'secret' => env('SPARKPOST_SECRET'),
-    ],
+        'sparkpost' => [
+            'secret' => env('SPARKPOST_SECRET'),
+        ],
 
-    'stripe' => [
-        'model' => App\User::class,
-        'key' => env('STRIPE_KEY'),
-        'secret' => env('STRIPE_SECRET'),
-    ],
+        'stripe' => [
+            'model' => App\User::class,
+            'key' => env('STRIPE_KEY'),
+            'secret' => env('STRIPE_SECRET'),
+        ],
+
+         'facebook' => [
+            'client_id' => '160884081137689',
+            'client_secret' => '3196ac419dd33564eb599a5cc176dbdd',
+            'redirect' => 'http://localhost/Web_Thuc_Tap/public/loginFaceBook/facebook/callback',
+        ],  
 
 ];

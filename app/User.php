@@ -29,10 +29,19 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public static function add()
+    public static function add($full_name,$email,$phone,$address,$password)
     {
-        
+        $user = User::create([
+            'full_name' => $full_name,
+            'email' => $email,
+            'password' => bcrypt($password),
+            'phone' => $phone,
+            'address' => $address,
+            'group' => 0,
+            'active' => 0,
+            'remember_token'=> csrf_token()
+        ]);
+       
     }
-
 
 }

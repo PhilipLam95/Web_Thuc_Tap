@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 class Product extends Model
 {
     protected $table = "products";
-    protected $fillable = ['id','name','id_type','description','unit_price','sale_quantity','image','unit','Material','view','id_par','contact_price'];
+    protected $fillable = ['id','name','id_type','description','unit_price','sale_quantity','image','unit','Material','view','id_par','contact_price','status_pro'];
     public $timestamps = true;
 
     public static function getProducts()  // lấy sản phẩm 
     {
-        $products = DB::table('products')->orderBy('id','desc');
+        $products = DB::table('products')->where('status_pro',1)->orderBy('id','desc');
         return $products;
     }
 
@@ -22,12 +22,15 @@ class Product extends Model
     public static function findAllProduct()
     {
         $products = DB::table('products')->leftJoin('import_product','products.id','=','import_product.id_product')
+                ->where('status_pro',1)
                 ->orderBy('products.id','desc');
         return $products;
     }
     public static function getManyNewProducts() //lấy nhiều sản phẩm
     {
-        $products = DB::table('products')->orderBy('id','desc');
+        $products = DB::table('products')
+            ->where('status_pro',1)
+            ->orderBy('id','desc');
         return $products;
     }
 
@@ -46,16 +49,18 @@ class Product extends Model
         return $products;
     }
 
-    public static function findProDuctBestSale()
+    public static function findProDuctBestSale() //san pham ban chay
     {
          $products =DB::table('products')->join('import_product','products.id','=','import_product.id_product')
+                ->where('status_pro',1)
                 ->orderBy('products.sale_quantity','desc');
         return $products;
     }
 
-    public static function findProducBestFeature()
+    public static function findProducBestFeature() // san pham noi bat
     {
         $products =DB::table('products')->join('import_product','products.id','=','import_product.id_product')
+                ->where('status_pro',1)
                 ->orderBy('products.view','desc');
         return $products;
 
@@ -87,6 +92,49 @@ class Product extends Model
         return $products;
     
     }
+
+    // trang quản trị
+
+    public static function FindAllProductAdmin()
+    {
+        $products = DB::table('products')->join('category','products.id_type','=','category.id')
+                ->join('import_product','products.id','=','import_product.id_product')
+                ->orderBy('id_product','desc');
+        return $products;
+    }
+
+    public static function add($name_product,$description,$type,$type_child,$sale_price,$Material,$size,$image)
+    {
+        $product = new Product;
+        $product->name = $name_product;
+        $product->id_type = $type_child;
+        $product->description= $description;
+        $product->unit_price = $sale_price;
+        $product->Materia = $Material;
+        $product->id_par = $type;
+        $product->size = $size;
+        $product->status_pro =0;
+        $product->image = $image;
+        $product->save();
+        return $product->id;
+    }
+
+    public static function acceptProducts($id)
+    {
+        DB::table('products')
+            ->where('id',$id)
+            ->update(['status_pro'=>1]);
+    }   
+
+     public static function unacceptProducts($id)
+    {
+        DB::table('products')
+            ->where('id',$id)
+            ->update(['status_pro'=>0]);
+    }
+
+
+    
 
     
 }

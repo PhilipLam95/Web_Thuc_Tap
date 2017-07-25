@@ -41,7 +41,7 @@
 		@endif
 	
 	@endfor
-		<div class="new">
+	<div class="new">
 		   <div class="container">
 		     <h3 style="color:#4d1a00">CÁC SẢN PHẨM MỚI</h3>
 		     <div class="new-products">
@@ -123,7 +123,6 @@
 		   </div>    
 		</div>
 		<style type="text/css">
-
 		</style>
 		<!---->
 		<div class="top-sellers"> 
@@ -224,6 +223,6 @@
 		   </div>
 		   </div>
 		</div>
-		<form></form>
+<form></form>
 		
 @endsection

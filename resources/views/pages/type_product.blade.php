@@ -89,7 +89,7 @@
 											{
 												if($items->parent_id == $id)
 												{
-												echo '<a ><p style="left:0px;text-align:center" href="aasdsadsa">'.$items->name_type.'</p>';
+												echo '<a ><p style="left:0px;" href="aasdsadsa">'.$items->name_type.'</p>';
 							         			subMen($data,$items->id);
 							          			echo "</a>";
 													

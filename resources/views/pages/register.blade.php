@@ -2,7 +2,7 @@
 @section('noidung')
 <div class="container">
 	  <ol class="breadcrumb">
-		  <li><a href="index.html">Home</a></li>
+		  <li><a href="index.html">Home  </a></li>
 		  <li class="active">Account</li>
 		 </ol>
 	 <div class="registration">
@@ -15,68 +15,49 @@
 			 <!-- [if lt IE 7]>  
 				< link rel='stylesheet' type='text/css' href='ie6.css'/>  
 			 <! [endif] -->  
-			 <script>
-				(function() {
 			
-				// Create input element for testing
-				var inputs = document.createElement('input');
-				
-				// Create the supports object
-				var supports = {};
-				
-				supports.autofocus   = 'autofocus' in inputs;
-				supports.required    = 'required' in inputs;
-				supports.placeholder = 'placeholder' in inputs;
-			
-				// Fallback for autofocus attribute
-				if(!supports.autofocus) {
-					
-				}
-				
-				// Fallback for required attribute
-				if(!supports.required) {
-					
-				}
-			
-				// Fallback for placeholder attribute
-				if(!supports.placeholder) {
-					
-				}
-				
-				// Change text inside send button on submit
-				var send = document.getElementById('register-submit');
-				if(send) {
-					send.onclick = function () {
-						this.innerHTML = '...Sending';
-					}
-				}
-			
-			 })();
-			 </script>
+			@if(count($errors)>0)
+				<div class="alert alert-danger">
+					<ul>
+						@foreach($errors->all() as $error)
+						<li>{{$error}}</li>
+						@endforeach
+					</ul>
+				</div>
+			@endif
+			@if(Session::has('thanhcong'))
+				<div class="alert alert-success" id="alert">{{Session::get('thanhcong')}}</div>
+			@endif
+			@if(Session::has('thatbai'))
+				<div class="alert alert-danger" id="alert">{{Session::get('thatbai')}}</div>
+			@endif
 			<div class="registration_form">
 			 <!-- Form -->
 				<form id="registration_form" action="{{route('register')}}" method="post">
+					<input type="hidden" name="_token" value="{{csrf_token()}}">
 					<h4>Đăng ký</h4>
+
 					<div>
 						<label>
-							<input placeholder="full_name:" type="text" name ="full_name" tabindex="1" required autofocus>
+							<input placeholder="full_name:" type="text" name ="full_name" id="full_name" tabindex="1" required autofocus>
 						</label>
 					</div>
 					
 					<div>
 						<label>
-							<input placeholder="email address:" type="email" name="email" tabindex="3" required>
+							<input placeholder="email " type="email" name="email" id="email" tabindex="3" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" data-validation="email">
 						</label>
 					</div>
 					<div>
 						<label>
-							<input placeholder="Mobile:" type="email" name="phone" tabindex="3" required>
+							<input placeholder="Mobile:" type="phone" name="phone" id="phone" tabindex="3"  pattern="[0-9]{10,11}" required required title=" nhâp số điện thoại 10 hoặc 11 chữ số">
 						</label>
 					</div>
 					<div>
 						<label>
-							<input placeholder="Address:" type="email" tabindex="3" required>
+							<input placeholder="Address:" type="address" name="address" id="address" tabindex="3" required>
 						</label>
+					</div>
 					<!-- </div>					
 						<div class="sky_form1">
 							<ul>
@@ -86,15 +67,15 @@
 							</ul>
 						</div>					
 					<div> -->
-						<div>
+					<div>
 							<label>
-								<input placeholder="password" type="password" name="password" tabindex="4" required>
+								<input placeholder="password" type="password" name="password" id="password" tabindex="4" required>
 							</label>
-						</div>
-					</div>						
+					</div>
+								
 					<div>
 						<label>
-							<input placeholder="retype password" type="password" name="re_password" tabindex="4" required>
+							<input placeholder="retype password" type="password" name="re_password" id="re_password" tabindex="4" required>
 						</label>
 					</div>	
 
@@ -102,26 +83,30 @@
 						<input type="submit" value="create an account" id="register-submit">
 					</div>
 
-					<div class="sky-form">
+					<!-- <div class="sky-form">
 						<label class="checkbox"><input type="checkbox" name="checkbox" ><i></i>i agree to mobilya.com &nbsp;<a class="terms" href="#"> terms of service</a> </label>
-					</div>
+					</div> -->
 				</form>
 				<!-- /Form -->
-			 </div>
+			</div>
 		 </div>
 		 <div class="registration_left">
 			 <h2>existing user</h2>
 			 <div class="registration_form">
 			 <!-- Form -->
-				<form id="registration_form" action="contact.php" method="post">
+			 	@if(Session::has('loitruycap'))
+					<div class="alert alert-success">{{Session::get('loitruycap')}}</div>
+				@endif
+				<form id="registration_form" action="{{route('signin')}}" method="post">
+				<input type="hidden" name="_token" value="{{csrf_token()}}">
 					<div>
 						<label>
-							<input placeholder="email:" type="email" tabindex="3" required>
+							<input placeholder="email:" name="email" type="email" tabindex="3" required>
 						</label>
 					</div>
 					<div>
 						<label>
-							<input placeholder="password" type="password" tabindex="4" required>
+							<input placeholder="password" name="password" type="password" tabindex="4" required>
 						</label>
 					</div>						
 					<div>

@@ -24,4 +24,19 @@ class TypeProduct extends Model
     	$type = DB::table('category')->where('category.parent_id',1);
     	return $type;
     }
+
+    public static function findTypeProductChild() // tìm loại sản phẩm có parent_id>1
+    {
+        $typechild = DB::table('category')->where('category.parent_id','>',1);
+        return $typechild;
+
+    }
+    //trang quan tri
+    public static function findTypeChildByIdPar($id)
+    {
+        $typechild =DB::table('category')->where('category.parent_id',$id);
+        return $typechild;
+    }
+
+
 }

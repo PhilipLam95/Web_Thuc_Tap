@@ -32,8 +32,16 @@
         </div>
         <div class="top_left">
           <ul>
-            <li class="top_link">Email:<a href="mailto@example.com">info(at)Mobilya.com</a></li>|
-            <li class="top_link"><a href="login.html">My Account</a></li>|          
+          @if(Auth::check())
+          
+            <li class="top_link">Thông Tin :<a href="mailto@example.com">{{Auth::user()->full_name}}</a></li>| 
+            <li class="top_link"><a href="login.html">Chào bạn: {{Auth::user()->full_name}}</a></li>|
+            <li class="top_link"><a href="{{route('logout')}}">Đăng xuất</a></li>   
+          
+          @else
+            
+            <li class="top_link"><a href="{{route('register')}}">Sign Up</a></li>   
+          @endif      
           </ul>
           <div class="social">
             <ul>
@@ -55,11 +63,15 @@
        </div>
        <div class="header_right"> 
          <div class="login">
-           <a href="{{ route('login')}}">LOGIN</a>
+         @if(Auth::check())
+           <a href="{{ route('logout')}}" >LOGOUT</a>
+          @else
+           <a href="{{route('signin')}}" >LOGIN</a>
+          @endif 
          </div>
          <div class="cart box_1">
           <a href="cart.html">
-            <h3> <span class="simpleCart_total">$0.00</span> (<span id="simpleCart_quantity" class="simpleCart_quantity">0</span> items)<img src="images/bag.png" alt=""></h3>
+            <h3> <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity">10</span> items)<img src="images/bag.png" alt=""></h3>
           </a>  
           <p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p>
           <div class="clearfix"> </div>

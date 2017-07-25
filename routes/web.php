@@ -10,47 +10,134 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+		Route::get('/',
+			['as'=>'index',
+			'uses'=>'HomeController@getIndex']);
+		//--------------------Liên Hệ------------------------------
+		Route::get('contact',
+			['as'=>'contact',
+			'uses'=>'HomeController@getContact']);
+		//--------------------------------------------------
 
-Route::get('/',
-	['as'=>'index',
-	'uses'=>'HomeController@getIndex']);
+		//--------------------Gioi thiệu------------------------------
+		Route::get('introduce',
+			['as'=>'introduce',
+			'uses'=>'HomeController@getIntroduce']);
+		//--------------------Show  sản phẩm------------------------------
 
-Route::get('contact',
-	['as'=>'contact',
-	'uses'=>'HomeController@getContact']);
-
-Route::get('introduce',
-	['as'=>'introduce',
-	'uses'=>'HomeController@getIntroduce']);
-
-Route::get('all_product',
-	['as'=>'new_product',
-	'uses'=>'HomeController@getProduct']);
-
-Route::get('detail/{id}',
-	['as'=>'detail',
-	'uses'=>'HomeController@getDetail']);
-
-Route::get('type/{id}',
-	['as'=>'type',
-	'uses'=>'ProductController@getTypeProDuct']);
-
-Route::get('type_par/{id}',
-	['as'=>'type_par',
-	'uses'=>'ProductController@getTypeProDuctByIdPar']);
-
-Route::get('register',
-	['as'=>'register',
-	'uses'=>'UserController@Register']);// dang ki
-
-Route::post('register',
-	['as'=>'register',
-	'uses'=>'UserController@postRegister']);// dang ki
-
-Route::get('login',
-	['as'=>'login',
-	'uses'=>'UserController@getlogin']);// dang nhap
+		Route::get('all_product',
+			['as'=>'new_product',
+			'uses'=>'HomeController@getProduct']);
 
 
+		//-------------------Chi tiết sản phẩm-------------------------------
+		Route::get('detail/{id}',
+			['as'=>'detail',
+			'uses'=>'HomeController@getDetail']);
+		//--------------------------------------------------
+
+		//---------------------Loại sản phẩm con-----------------------------
+		Route::get('type/{id}',
+			['as'=>'type',
+			'uses'=>'ProductController@getTypeProDuct']);
+		//--------------------------------------------------
+
+		//--------------------Loại sản phẩm từng nội thất------------------------------
+		Route::get('type_par/{id}',
+			['as'=>'type_par',
+			'uses'=>'ProductController@getTypeProDuctByIdPar']);
+		//--------------------------------------------------
+
+		//----------------------Đăng ký----------------------------
+		Route::get('register',
+			['as'=>'register',
+			'uses'=>'UserController@Register']);
+
+		Route::post('register',
+			['as'=>'register',
+			'uses'=>'UserController@postRegister']);
+
+		Route::get('send-to-mail/{id}/{token}', 
+			['as'=>'send-to-mail',
+			'uses'=>'UserController@activeUser']);
+		//--------------------------------------------------
+		 
+
+		//--------------------Đăng Nhập---------------------
+		Route::get('signin',
+			['as'=>'signin',
+			'uses'=>'UserController@getSignin']);
+
+		Route::post('signin',
+			['as'=>'signin',
+			'uses'=>'UserController@postSignin']);
+		//---------------------------------------------------------------------------
+
+
+		//-------------------- Đăng nhập bằng facebook ------------------------------
+		Route::get('loginFaceBook/{provider}',[
+			'as'=>'provider_login',
+			'uses'=>'UserController@redirectToProvider']);
+
+		Route::get('loginFaceBook/{provider}/callback', [
+			'as'=>'provider_login_callback',
+			'uses'=>'UserController@handleProviderCallback']);
+		//---------------------------------------------------------------------------
+
+		//--------------------Đăng Xuất---------------------
+
+		Route::get('logout',
+			['as'=>'logout',
+			 'uses'=>'UserController@logout']);
+
+//--------------------------------------------------
+
+
+//------------------view Admin--------------------------------
+
+
+//--------------------------------------------------
+
+//------------------------------------------------------------------------Trang Quản trị-------------------------------------------------------
+
+
+	//------------------------Login Manager--------------------------
+	Route::get('manager',
+		['as'=>'manager',
+		 'uses'=>'AdminController@loginManager']);
+		
+	Route::post('manager',
+		['as'=>'manager',
+		'uses'=>'AdminController@postloginManager']);
+
+	//--------------------------------------------------
+
+
+	//------------------Show sản phẩm-------------------------------
+
+
+	//--------------------------------------------------------------\
+	Route::group(['prefix' => 'dashboard','middleware' => 'employee'], function() 
+	{
+		Route::get('process',['as'=>'process','uses'=>'AdminController@ViewProcess']);
+		Route::get('list_products',['as'=>'list_products','uses'=>'ProductController@getProduct']);
+		Route::get('select_typechild/{id}','CategoryController@typechild');// lay loai san pham theo noi that
+
+		Route::get('product/{id}/approve',['as'=>'accept_pro','uses'=>'ProductController@acceptProduct']);
+    	Route::get('product/{id}/unapprove',['as'=>'unaccept_pro','uses'=>'ProductController@unacceptProduct']);
+		Route::post('product/add',['as'=>'addProDuct','uses'=>'ProductController@postAdd']);
+		Route::get('product/{id}/remove',['as'=>'deletePro','uses'=>'ProductController@remove']);
+
+
+			//kho 
+		Route::get('warehouse',['as'=>'warehouse','uses'=>'ImportController@getProduct']);
+			//Them san moi vao kho
+		Route::get('warehouse/add',['as'=>'getadd_new_wareproduct','uses'=>'ImportController@getAdd']);
+		Route::post('warehouse/add',['as'=>'postadd_new_wareproduct','uses'=>'ImportController@postAdd']);
+			//-------------------
+
+		// Route::get('warehouse/add/id',['as'=>'add_old_wareproduct','uses'=>'ImportController@']);//Nhập thêm số lượng cho sản phẩm cũ
+
+	});
 
 
