@@ -103,7 +103,7 @@ class Product extends Model
         return $products;
     }
 
-    public static function add($name_product,$description,$type,$type_child,$sale_price,$Material,$size,$image)
+    public static function add($name_product,$description,$type,$type_child,$sale_price,$Material,$size,$image,$image2,$image3)
     {
         $product = new Product;
         $product->name = $name_product;
@@ -115,6 +115,8 @@ class Product extends Model
         $product->size = $size;
         $product->status_pro =0;
         $product->image = $image;
+        $product->image2 = $image2;
+        $product->image3 = $image3;
         $product->save();
         return $product->id;
     }
@@ -133,6 +135,19 @@ class Product extends Model
             ->update(['status_pro'=>0]);
     }
 
+    public static function findImages($id) 
+    {
+        $images = DB::table('products')->where('id','=',$id)
+                    //->select('sanpham.anh_0','sanpham.anh_1','sanpham.anh_2','sanpham.anh_3')
+                    ->select('products.image','products.image2','products.image3')
+                    ->get();
+        return $images;
+    }
+
+     public static function remove($id)
+      {
+        DB::table('products')->where('id','=',$id)->delete();
+    }
 
     
 

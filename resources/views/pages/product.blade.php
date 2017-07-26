@@ -74,72 +74,27 @@
 			<div class="rsidebar span_1_of_left">
 				 <section class="sky-form">
 					 <div class="product_right">
-						 <h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Categories</h4>
-						 <div class="tab1">
-							 <ul class="place">								
-								 <li class="sort">Furniture</li>
+						 <h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Danh Muc San Pham</h4>
+						  {{ Form::open(array('url' => '', 'files' => true)) }}
+						  @foreach($types as $type)	
+						 <div class="tab{{$type->id}}" id="click" value="{{ $type->id}}">
+							 <ul class="place">
+														
+								 <li class="sort" value="{{$type->id}}">{{ $type->name_type}}</li>
 								 <li class="by"><img src="images/do.png" alt=""></li>
-									<div class="clearfix"> </div>
+							
+									<div class="clearfix" value="{{$type->id}}"> </div>
 							  </ul>
-							 <div class="single-bottom" style="display: none;">						
-									<a href="#"><p>Sofas</p></a>
-									<a href="#"><p>Fabric Sofas</p></a>
-									<a href="#"><p>Love Seats</p></a>
-									<a href="#"><p>Dinning Sets</p></a>
-						     </div>
-					      </div>						  
-						  <div class="tab2">
-							 <ul class="place">								
-								 <li class="sort">Decor</li>
-								 <li class="by"><img src="images/do.png" alt=""></li>
-									<div class="clearfix"> </div>
-							  </ul>
-							 <div class="single-bottom" style="display: none;">						
-									<a href="#"><p>Shelves</p></a>
-									<a href="#"><p>Wall Racks</p></a>
-									<a href="#"><p>Curios</p></a>
-									<a href="#"><p>Ash Trays</p></a>
+							 <div class="single-bottom" style="display: none;">
+							 							
+									
+									
+								
 						     </div>
 					      </div>
-						  <div class="tab3">
-							 <ul class="place">								
-								 <li class="sort">Lighting</li>
-								 <li class="by"><img src="images/do.png" alt=""></li>
-									<div class="clearfix"> </div>
-							  </ul>
-							 <div class="single-bottom" style="display: none;">						
-									<a href="#"><p>Table Lamps</p></a>
-									<a href="#"><p>Tube Lights</p></a>
-									<a href="#"><p>Study Lamps</p></a>
-									<a href="#"><p>Usb Lamps</p></a>
-						     </div>
-					      </div>
-						  <div class="tab4">
-							 <ul class="place">								
-								 <li class="sort">Bed &amp; Bath</li>
-								 <li class="by"><img src="images/do.png" alt=""></li>
-									<div class="clearfix"> </div>
-							  </ul>
-							 <div class="single-bottom" style="display: none;">						
-									<a href="#"><p>Towels</p></a>
-									<a href="#"><p>Bath Roles</p></a>
-									<a href="#"><p>Mirrors</p></a>
-									<a href="#"><p>Soap Stands</p></a>
-						     </div>
-					      </div>
-						  <div class="tab5">
-							 <ul class="place">								
-								 <li class="sort">Fabric</li>
-								 <li class="by"><img src="images/do.png" alt=""></li>
-									<div class="clearfix"> </div>
-							  </ul>
-							 <div class="single-bottom" style="display: none;">						
-									<a href="#"><p>Sofas</p></a>
-									<a href="#"><p>Fabric Sofas</p></a>
-									<a href="#"><p>Beds</p></a>
-									<a href="#"><p>Relax Chairs</p></a>
-						     </div>
-					      </div>
+					      @endforeach
+
+
 						  
 						  <!--script-->
 						<script>

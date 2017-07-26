@@ -26,13 +26,26 @@ class ImportController extends Controller
     }
     public function postAdd(Request $request) {
         $fileName = "";
+        $fildName2 ="";
+        $fileName3 = "";
          if (Input::file('image')->isValid()) 
             {
                 $fileName = Input::file('image')->getClientOriginalName();
                 Input::file('image')->move(base_path().'/public/images/',$fileName);
             }
-        Product::add($request->name_product,$request->description,$request->type,$request->type_child,$request->sale_price,$request->Materia,$request->size,$fileName);
-        Import_Product::add($request->id_product,$request->name_product,$request->import_price,$request->import_quantity);
+            if (is_null(Input::file('image2')->isValid()) || Input::file('image2')->isValid()) 
+            {
+                $fileName2 = Input::file('image2')->getClientOriginalName();
+                Input::file('image2')->move(base_path().'/public/images/',$fileName2);
+            }
+             if (is_null(Input::file('image3')->isValid()) || Input::file('image3')->isValid()) 
+            {
+                $fileName3 = Input::file('image3')->getClientOriginalName();
+                Input::file('image3')->move(base_path().'/public/images/',$fileName3);
+            }
+
+        Product::add($request->name_product,$request->description,$request->type,$request->type_child,$request->sale_price,$request->Materia,$request->size,$fileName,$fileName2,$fileName3);
+        Import_Product::add($request->name_product,$request->import_price,$request->import_quantity);
 
         return redirect()->back()->with('thanhcong','Thêm sản phẩm thành công');
     }

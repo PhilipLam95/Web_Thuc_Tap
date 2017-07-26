@@ -8,7 +8,8 @@ use App\TypeProduct;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Collection;
-
+use File;
+use Illuminate\Support\Facades\Input;
 class ProductController extends Controller
 {
     //
@@ -74,10 +75,14 @@ class ProductController extends Controller
         foreach ($images as $image) 
         {
             File::delete('public/images/'.$image->image);
+            File::delete('public/images/'.$image->image2);
+            File::delete('public/images/'.$image->image3);
         }
         $sanpham = Product::remove($id);
-        return redirect('dashboard/product')->with(['flash_level'=>'success','flash_message'=>'Xóa sản phẩm thành công!!!']);
+        return redirect('dashboard/list_products')->with(['flash_level'=>'success','flash_message'=>'Xóa sản phẩm thành công!!!']);
     }
+
+ 
 
 
     

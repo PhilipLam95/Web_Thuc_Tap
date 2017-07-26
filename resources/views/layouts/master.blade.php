@@ -36,6 +36,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 @include('script')
 
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+<script type="text/javascript"> // liet ke san pham
+$(document).ready(function(e)
+{
+  $('.clearfix').click(function(e)
+  {
+    var id = $(this).attr('value');
+    var route="{{route('select_typechild','id_sp')}}";
+    route = route.replace('id_sp',id);
+    $.ajax({
+      url:route,
+      type:'get',
+      dataType: "json",
+      data:{id,id},
+      success:function(data)
+      {
+        $('.single-bottom').empty();
+        $.each(data,function(key,value)
+        {
+          var route1 = "{{route('type','id_type')}}";
+          route1 = route1.replace('id_type',value.id);
+          $('.single-bottom').append('<a href="'+route1+'" value="'+value.id+'"><p>'+value.name_type+'</p></a> ')
+        });
+      }
+    });
+
+
+  });
+
+});
+</script>
 <script src="js/menu_jquery.js"></script>
 <script src="js/simpleCart.min.js"> </script>
 <script src="js/responsiveslides.min.js"></script>

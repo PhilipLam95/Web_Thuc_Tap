@@ -48,7 +48,7 @@ class UserController extends Controller
         $user->password = Hash::make($req->password);
         $user->phone = $req->phone;
         $user->address = $req->address;
-        $user->active = 1;
+        $user->active = 0;
         $user->remember_token = csrf_token();
         $user->save();
         }

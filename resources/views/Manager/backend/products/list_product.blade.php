@@ -125,7 +125,7 @@
                     <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                         <div class="form-group">
                             <div class="form-line">
-                                <input type="file" name="image1" id="new_image" class="form-control">
+                                <input type="file" name="image" id="image" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -137,7 +137,7 @@
                     <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                         <div class="form-group">
                             <div class="form-line">
-                                <input type="file" name="image2" id="new_image" class="form-control">
+                                <input type="file" name="image2" id="image" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -150,7 +150,7 @@
                     <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                         <div class="form-group">
                             <div class="form-line">
-                                <input type="file" name="image3" id="new_image" class="form-control">
+                                <input type="file" name="image3" id="image" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -235,7 +235,7 @@
                                                
                                                     
                                                  <td>
-                                                    <a href="" onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa">
+                                                    <a href="{!! url('dashboard/product/'.$product->id_product.'/remove') !!}" onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa">
                                                         <i class="fa  fa-trash-o  fa-fw"></i>
                                                     </a>            
                                                 </td>
@@ -320,7 +320,6 @@
 $('#status').on('change',function(e)
 {
     var id=e.target.value;
-    alert(id);
     if(id==1)
     {
         $('#sale_price').attr("disabled", "disabled");

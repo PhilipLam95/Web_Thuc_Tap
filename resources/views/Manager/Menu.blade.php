@@ -13,7 +13,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i>Tổng quan</a>
+                            <a href="{{route('process')}}"><i class="fa fa-dashboard fa-fw"></i>Tổng quan</a>
                         </li>
                         <li>
                             <a href="{{route('list_products')}}"><i class="fa fa-bar-chart-o fa-fw"></i>Sản phẩm<span class="fa arrow"></span></a>

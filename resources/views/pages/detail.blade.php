@@ -141,74 +141,25 @@
 				<section  class="sky-form">
 					 <div class="product_right">
 						 <h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Categories</h4>
-						 <div class="tab1">
-							 <ul class="place">								
-								 <li class="sort">Furniture</li>
-								 <li class="by"><img src="images/do.png" alt=""></li>
-									<div class="clearfix"> </div>
-							  </ul>
-							 <div class="single-bottom">						
-									<a href="#"><p>Sofas</p></a>
-									<a href="#"><p>Fabric Sofas</p></a>
-									<a href="#"><p>Love Seats</p></a>
-									<a href="#"><p>Dinning Sets</p></a>
-						     </div>
-					      </div>						  
-						  <div class="tab2">
-							 <ul class="place">								
-								 <li class="sort">Decor</li>
-								 <li class="by"><img src="images/do.png" alt=""></li>
-									<div class="clearfix"> </div>
-							  </ul>
-							 <div class="single-bottom">						
-									<a href="#"><p>Shelves</p></a>
-									<a href="#"><p>Wall Racks</p></a>
-									<a href="#"><p>Curios</p></a>
-									<a href="#"><p>Ash Trays</p></a>
-						     </div>
-					      </div>
-						  <div class="tab3">
-							 <ul class="place">								
-								 <li class="sort">Lighting</li>
-								 <li class="by"><img src="images/do.png" alt=""></li>
-									<div class="clearfix"> </div>
-							  </ul>
-							 <div class="single-bottom">						
-									<a href="#"><p>Table Lamps</p></a>
-									<a href="#"><p>Tube Lights</p></a>
-									<a href="#"><p>Study Lamps</p></a>
-									<a href="#"><p>Usb Lamps</p></a>
-						     </div>
-					      </div>
-						  <div class="tab4">
-							 <ul class="place">								
-								 <li class="sort">Bed & Bath</li>
-								 <li class="by"><img src="images/do.png" alt=""></li>
-									<div class="clearfix"> </div>
-							  </ul>
-							 <div class="single-bottom">						
-									<a href="#"><p>Towels</p></a>
-									<a href="#"><p>Bath Roles</p></a>
-									<a href="#"><p>Mirrors</p></a>
-									<a href="#"><p>Soap Stands</p></a>
-						     </div>
-					      </div>
-						  <div class="tab5">
-							 <ul class="place">								
-								 <li class="sort">Fabric</li>
-								 <li class="by"><img src="images/do.png" alt=""></li>
-									<div class="clearfix"> </div>
-							  </ul>
-							 <div class="single-bottom">						
-									<a href="#"><p>Sofas</p></a>
-									<a href="#"><p>Fabric Sofas</p></a>
-									<a href="#"><p>Beds</p></a>
-									<a href="#"><p>Relax Chairs</p></a>
-						     </div>
-					      </div>
-						  
+						  <?php $type= App\TypeProduct::getTypeProDuct()->get()->toArray();?>
+						 @foreach($type as $items)
+						 @if($items->parent_id==1)
+							 <div class="tab{{$items->id}}">
+								 <ul class="place">								
+									 <li class="sort">{{$items->name_type}}</li>
+									 <li class="by"><img src="images/do.png" alt=""></li>
+										<div class="clearfix" value="{{$items->id}}"> </div>
+								  </ul>
+								 <div class="single-bottom">						
+										
+							     </div>
+						      </div>
+						 @endif						  
+						@endforeach
+
 						  <!--script-->
 						<script>
+
 							$(document).ready(function(){
 								$(".tab1 .single-bottom").hide();
 								$(".tab2 .single-bottom").hide();

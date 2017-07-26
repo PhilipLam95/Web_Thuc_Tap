@@ -90,15 +90,17 @@
 			['as'=>'logout',
 			 'uses'=>'UserController@logout']);
 
-//--------------------------------------------------
-
-
+//------------------------------------------------------------------------------------------------------------------------
+Route::group(['prefix' => 'dashboard'],function()  // 
+{
+	Route::get('select_typechild/{id}',['as'=>'select_typechild','uses'=>'CategoryController@typechild']);// lay loai san pham theo noi that
+});
 //------------------view Admin--------------------------------
 
 
 //--------------------------------------------------
 
-//------------------------------------------------------------------------Trang Quản trị-------------------------------------------------------
+//---------------------------------Trang Quan Trị----------------------------------------
 
 
 	//------------------------Login Manager--------------------------
@@ -117,11 +119,13 @@
 
 
 	//--------------------------------------------------------------\
+
+
 	Route::group(['prefix' => 'dashboard','middleware' => 'employee'], function() 
 	{
 		Route::get('process',['as'=>'process','uses'=>'AdminController@ViewProcess']);
 		Route::get('list_products',['as'=>'list_products','uses'=>'ProductController@getProduct']);
-		Route::get('select_typechild/{id}','CategoryController@typechild');// lay loai san pham theo noi that
+		
 
 		Route::get('product/{id}/approve',['as'=>'accept_pro','uses'=>'ProductController@acceptProduct']);
     	Route::get('product/{id}/unapprove',['as'=>'unaccept_pro','uses'=>'ProductController@unacceptProduct']);
@@ -129,7 +133,7 @@
 		Route::get('product/{id}/remove',['as'=>'deletePro','uses'=>'ProductController@remove']);
 
 
-			//kho 
+			//------------------------------------kho-------------------------------------// 
 		Route::get('warehouse',['as'=>'warehouse','uses'=>'ImportController@getProduct']);
 			//Them san moi vao kho
 		Route::get('warehouse/add',['as'=>'getadd_new_wareproduct','uses'=>'ImportController@getAdd']);
@@ -137,7 +141,6 @@
 			//-------------------
 
 		// Route::get('warehouse/add/id',['as'=>'add_old_wareproduct','uses'=>'ImportController@']);//Nhập thêm số lượng cho sản phẩm cũ
-
 	});
 
 

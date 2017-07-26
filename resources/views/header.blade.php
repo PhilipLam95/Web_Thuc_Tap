@@ -33,14 +33,15 @@
         <div class="top_left">
           <ul>
           @if(Auth::check())
-          
+            @if(Auth::user()->group == 0)
             <li class="top_link">Thông Tin :<a href="mailto@example.com">{{Auth::user()->full_name}}</a></li>| 
             <li class="top_link"><a href="login.html">Chào bạn: {{Auth::user()->full_name}}</a></li>|
-            <li class="top_link"><a href="{{route('logout')}}">Đăng xuất</a></li>   
-          
-          @else
-            
-            <li class="top_link"><a href="{{route('register')}}">Sign Up</a></li>   
+            <li class="top_link"><a href="{{route('logout')}}">Đăng xuất</a></li>
+            @else 
+            <li class="top_link"><a href="{{route('register')}}">Sign Up</a></li> 
+            @endif
+         
+              
           @endif      
           </ul>
           <div class="social">
@@ -64,10 +65,12 @@
        <div class="header_right"> 
          <div class="login">
          @if(Auth::check())
+         
            <a href="{{ route('logout')}}" >LOGOUT</a>
-          @else
+        @else
            <a href="{{route('signin')}}" >LOGIN</a>
-          @endif 
+          
+        @endif 
          </div>
          <div class="cart box_1">
           <a href="cart.html">

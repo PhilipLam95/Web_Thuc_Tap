@@ -9,6 +9,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use App\Cart;
+use App\TypeProduct;
 
 class HomeController extends Controller
 {
@@ -35,7 +36,9 @@ class HomeController extends Controller
    public function getProduct()
    {
       $all_pros = Product::findAllProduct()->paginate(9);
-      return view('pages.product',['all_pros'=>$all_pros]);
+      $types = TypeProduct::findTypeProductByIdPar()->get();
+      $type_childs = TypeProduct::findTypeProductChild()->get();
+      return view('pages.product',['all_pros'=>$all_pros,'types'=>$types,'type_childs'=>$type_childs]);
    }
    public function getDetail($id)
    {

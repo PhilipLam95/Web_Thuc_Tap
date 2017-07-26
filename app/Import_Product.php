@@ -26,11 +26,11 @@ class Import_Product extends Model
     	return $import;
     }
 
-    public static function add($id_product,$name_product,$import_price,$import_quantity) {
-
+    public static function add($name_product,$import_price,$import_quantity) {
+        $x = DB::table('products')->max('id');
 
     	$import = new Import_Product;
-        $import->id_product = $id_product;
+        $import->id_product = $x;
        	$import->Name_Product = $name_product;
        	$import->import_price = $import_price;
        	$import->import_quantity = $import_quantity;

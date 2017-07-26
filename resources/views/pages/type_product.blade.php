@@ -25,7 +25,7 @@
 								<span> </span>
 							</div>						
 							<div class="product-img b-link-stripe b-animate-go  thickbox">
-								<img src="images/{{ $product->image}}"  style="height:250px;width:200px" class="img-responsive" alt="">
+								<img src="images/{{ $product->image}}"  style="height:250px;width:200px;" class="img-responsive" alt="">
 								<div class="b-wrapper">
 									<h4 class="b-animate b-from-left  b-delay03">							
 										<button class="btns">
@@ -116,78 +116,20 @@
 								 <li class="sort">{{ $items->name_type}}</li>
 								 <li class="by"><img src="images/do.png" alt=""></li>
 								 
-									<div class="clearfix"> </div>
-									<?php 
-								 	 	subMen($type,$items->id);
-									?>
-
+									<div class="clearfix" value="{{$items->id}}"> </div>
+									
 							  </ul>
 							  
 							  
-							 <!-- <div class="single-bottom" style="display: none;">						
-									<a href="#"><p>Sofas</p></a>
-									<a href="#"><p>Fabric Sofas</p></a>
-									<a href="#"><p>Love Seats</p></a>
-									<a href="#"><p>Dinning Sets</p></a>
-						     </div> -->
+							 <div class="single-bottom" style="display: none;">						
+									
+						     </div>
 					      </div>
 					      @endif
 					      @endforeach
+
 					     				  
-						 <!--  <div class="tab2">
-							 <ul class="place">								
-								 <li class="sort">Decor</li>
-								 <li class="by"><img src="images/do.png" alt=""></li>
-									<div class="clearfix"> </div>
-							  </ul>
-							 <div class="single-bottom" style="display: none;">						
-									<a href="#"><p>Shelves</p></a>
-									<a href="#"><p>Wall Racks</p></a>
-									<a href="#"><p>Curios</p></a>
-									<a href="#"><p>Ash Trays</p></a>
-						     </div>
-					      </div> -->
-						<!--   <div class="tab3">
-							 <ul class="place">								
-								 <li class="sort">Lighting</li>
-								 <li class="by"><img src="images/do.png" alt=""></li>
-									<div class="clearfix"> </div>
-							  </ul>
-							 <div class="single-bottom" style="display: none;">						
-									<a href="#"><p>Table Lamps</p></a>
-									<a href="#"><p>Tube Lights</p></a>
-									<a href="#"><p>Study Lamps</p></a>
-									<a href="#"><p>Usb Lamps</p></a>
-						     </div>
-					      </div>
-						  <div class="tab4">
-							 <ul class="place">								
-								 <li class="sort">Bed &amp; Bath</li>
-								 <li class="by"><img src="images/do.png" alt=""></li>
-									<div class="clearfix"> </div>
-							  </ul>
-							 <div class="single-bottom" style="display: none;">						
-									<a href="#"><p>Towels</p></a>
-									<a href="#"><p>Bath Roles</p></a>
-									<a href="#"><p>Mirrors</p></a>
-									<a href="#"><p>Soap Stands</p></a>
-						     </div>
-					      </div>
-						  <div class="tab5">
-							 <ul class="place">								
-								 <li class="sort">Fabric</li>
-								 <li class="by"><img src="images/do.png" alt=""></li>
-									<div class="clearfix"> </div>
-							  </ul>
-							 <div class="single-bottom" style="display: none;">						
-									<a href="#"><p>Sofas</p></a>
-									<a href="#"><p>Fabric Sofas</p></a>
-									<a href="#"><p>Beds</p></a>
-									<a href="#"><p>Relax Chairs</p></a>
-						     </div>
-					      </div> -->
-						  
-						  <!--script-->
+						 
 						<script>
 							$(document).ready(function(){
 								$(".tab1 .single-bottom").hide();
