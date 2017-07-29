@@ -31,56 +31,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="css/form.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-
+<link rel="stylesheet" type="text/css" href="css/mystyle.css">
 
 @include('script')
 
-<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
-<script type="text/javascript"> // liet ke san pham
-$(document).ready(function(e)
-{
-  $('.clearfix').click(function(e)
-  {
-    var id = $(this).attr('value');
-    var route="{{route('select_typechild','id_sp')}}";
-    route = route.replace('id_sp',id);
-    $.ajax({
-      url:route,
-      type:'get',
-      dataType: "json",
-      data:{id,id},
-      success:function(data)
-      {
-        $('.single-bottom').empty();
-        $.each(data,function(key,value)
-        {
-          var route1 = "{{route('type','id_type')}}";
-          route1 = route1.replace('id_type',value.id);
-          $('.single-bottom').append('<a href="'+route1+'" value="'+value.id+'"><p>'+value.name_type+'</p></a> ')
-        });
-      }
-    });
 
-
-  });
-
-});
-</script>
-<script src="js/menu_jquery.js"></script>
-<script src="js/simpleCart.min.js"> </script>
-<script src="js/responsiveslides.min.js"></script>
-<script>
-    // You can also use "$(window).load(function() {"
-    $(function () {
-      // Slideshow 1
-      $("#slider1").responsiveSlides({
-         auto: true,
-     nav: true,
-     speed: 500,
-     namespace: "callbacks",
-      });
-    });
-  </script>
   
 </head>
 <body>
@@ -93,6 +48,34 @@ $(document).ready(function(e)
         <!--
         <!---->
         @include('footer')
+
+        
+<script type="text/javascript">
+  
+$('.add-to-cart').click(function()
+  {
+     var id = $(this).attr('value');
+     var route = "{{route('buy','id_sp')}}"; 
+     route = route.replace('id_sp',id);
+
+     $.ajax({
+      url:route,
+            type: "GET",
+            dataType:"json",
+            data:{id,id},   
+            success:function(data)
+            { 
+              
+              $('#simpleCart_quantity').html(data.totalQty);
+              $('#simpleCart_quantity').attr('value',data.totalQty);
+               /* If shopping cart is still open, items will appear on it at the same time of adding them */
+                if($(".shopping_cart_holder").css("display") == "block"){ // Check if shopping cart is open 
+                    $(".shopping_cart_info").trigger( "click" );  // update cart on event
+                }
+            }   
+     })
+  });
+</script>
 <!---->
   
 <!---->

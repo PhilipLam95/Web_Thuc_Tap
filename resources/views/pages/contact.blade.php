@@ -5,7 +5,7 @@
 <div class="contact">
 	 <div class="container">
 		 <ol class="breadcrumb">
-		  <li><a href="index.html">Home</a></li>
+		  <li><a href="{{route('index')}}">Home</a></li>
 		  <li class="active">Contact</li>
 		 </ol>
 		 <div class="contact-head">

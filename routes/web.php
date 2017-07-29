@@ -48,6 +48,16 @@
 			'uses'=>'ProductController@getTypeProDuctByIdPar']);
 		//--------------------------------------------------
 
+		//---------------------Tìm kiếm sản phẩm -------------------------------------
+		Route::get('search',
+			['as'=>'search',
+			'uses'=>'HomeController@getFind']);
+
+		Route::post('search',
+			['as'=>'search',
+			'uses'=>'HomeController@postFind']);
+
+		//----------------------------------------------------------------------------
 		//----------------------Đăng ký----------------------------
 		Route::get('register',
 			['as'=>'register',
@@ -89,16 +99,46 @@
 		Route::get('logout',
 			['as'=>'logout',
 			 'uses'=>'UserController@logout']);
+		//---------------------------------------------------------------------------
 
+		//--------------------Mua Hàng---------------------
+		Route::get('buy/{id}',
+			['as'=>'buy',
+			 'uses'=>'CartController@buy']);
+		//---------------------------------------------------------------------------
+		//-------------------- Xóa  1 item sản phẩm---------------------
+		Route::get('delete-item-cart/{id}',
+			['as'=>'delete-item-cart',
+			 'uses'=>'CartController@deleteItemCart']);
+		//---------------------------------------------------------------------------
+		//-----------------giam 1 san pham----------------------------
+		Route::get('delete-1-item/{id}',
+			['as'=>'delete-1-item',
+			'uses'=>'CartController@reduceByOne']);
+		//---------------------------------------------------------------------------
+		//-----------------tang 1 san pham----------------------------
+		Route::get('rise-1-item/{id}',
+			['as'=>'rise-1-item',
+			'uses'=>'CartController@riseByOne']);
+		//---------------------------------------------------------------------------
+
+		//-----------------Xóa giỏ hàng----------------------------
+		Route::get('delete-all-cart',
+			['as'=>'delete-all-cart',
+			'uses'=>'CartController@DeleteAllCart']);
+		//---------------------------------------------------------------------------
+
+		//--------------------chi tiết giỏ hàng---------------------
+		Route::get('cart_detail',
+			['as'=>'cart_detail',
+			 'uses'=>'CartController@show_cart']);
+		//---------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------
 Route::group(['prefix' => 'dashboard'],function()  // 
 {
 	Route::get('select_typechild/{id}',['as'=>'select_typechild','uses'=>'CategoryController@typechild']);// lay loai san pham theo noi that
 });
-//------------------view Admin--------------------------------
 
-
-//--------------------------------------------------
 
 //---------------------------------Trang Quan Trị----------------------------------------
 

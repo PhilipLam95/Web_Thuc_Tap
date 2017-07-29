@@ -73,10 +73,16 @@
         @endif 
          </div>
          <div class="cart box_1">
-          <a href="cart.html">
-            <h3> <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity">10</span> items)<img src="images/bag.png" alt=""></h3>
-          </a>  
-          <p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p>
+          <a href="{{route('cart_detail')}}">
+          @if(Session::has('cart'))
+            <h3> <span class="cart" style="padding-left: 20px"></span> (<span id="simpleCart_quantity" value="{{Session('cart')->totalQty}}" >{{Session('cart')->totalQty}}</span> sản phẩm)<img src="images/bag.png" alt=""></h3>
+          @else
+             <h3> <span class="cart" style="padding-left: 20px"></span> (<span id="simpleCart_quantity" >0</span> sản phẩm)<img src="images/bag.png" alt=""></h3>
+            
+          @endif
+          </a> 
+                 <!-- p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p> -->
+    
           <div class="clearfix"> </div>
          </div>        
        </div>
@@ -96,7 +102,8 @@
             <div class="megapanel">
 
               <div class="row" style="text-align: center">
-                <?php $type= App\TypeProduct::getTypeProDuct()->get()->toArray();?>
+                <?php $type= App\TypeProduct::getTypeProDuct()->get()->toArray();
+                    ?>
               	@foreach($type as $items)
                   <div class="col1">
                     <div class="h_nav">
@@ -119,22 +126,6 @@
                     </div>              
                   </div>
                 @endforeach
-         
-            
-                <!-- <div class="col1">
-                  <div class="h_nav">
-                    <h4>Tables</h4>
-                    <ul>
-                      <li><a href="products.html">Coffee Tables</a></li>
-                      <li><a href="products.html">Dinning Tables</a></li>
-                      <li><a href="products.html">Study Tables</a></li>
-                      <li><a href="products.html">Wooden Tables</a></li>
-                      <li><a href="products.html">Study Tables</a></li>
-                      <li><a href="products.html">Bar & Unit Stools</a></li>
-                    </ul> 
-                  </div>              
-                </div>-->
-         
               </div>
               <div class="row">
                 <div class="col2"></div>
@@ -155,8 +146,9 @@
               
            </ul> 
            <div class="search" >
-           <form>
-            <input  type="text" value="" placeholder="Search...">
+           <form action="{{route('search')}}" method="post">
+            {!! csrf_field() !!}
+            <input  type="text" value="" name="keyword" placeholder="Search...">
             <input type="submit" value="">
             </form>
          </div>

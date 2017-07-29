@@ -12,6 +12,9 @@ class Product extends Model
     protected $fillable = ['id','name','id_type','description','unit_price','sale_quantity','image','unit','Material','view','id_par','contact_price','status_pro'];
     public $timestamps = true;
 
+
+    
+
     public static function getProducts()  // lấy sản phẩm 
     {
         $products = DB::table('products')->where('status_pro',1)->orderBy('id','desc');
@@ -90,8 +93,18 @@ class Product extends Model
     
         
         return $products;
-    
     }
+
+    public static function SearchProduct($keyword)// tìm san phảm theo từ khóa
+    {
+         $search = DB::table('products')
+            ->where('products.name','like','%'.$keyword.'%')
+            ->orWhere('products.id','like','%'.$keyword.'%')
+            ->where('products.status_pro',1);
+                                      
+        return $search;
+    }
+    
 
     // trang quản trị
 
@@ -145,7 +158,7 @@ class Product extends Model
     }
 
      public static function remove($id)
-      {
+    {
         DB::table('products')->where('id','=',$id)->delete();
     }
 

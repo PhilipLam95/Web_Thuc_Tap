@@ -25,7 +25,7 @@
 <div class="single-sec">
 	 <div class="container">
 		 <ol class="breadcrumb">
-			 <li><a href="index.html">Home</a></li>
+			 <li><a href="{{route('index')}}">Home</a></li>
 			 <li class="active">Products</li>
 		 </ol>
 		 <!-- start content -->	
@@ -97,7 +97,7 @@
 							@endif
 							 <form class="navbar-form navbar-left" role="search">
 								  <div class="form-group">
-									<input type="text" class="form-control" placeholder="{{$products->import_quantity}}">
+									<input type="text"  class="form-control" disabled="" placeholder="{{$products->import_quantity}}">
 								  </div>
 								 
 							 </form>
@@ -137,152 +137,7 @@
 						 </ul>
 				  </div>				  					
 		    </div>
-			<div class="rsidebar span_1_of_left">
-				<section  class="sky-form">
-					 <div class="product_right">
-						 <h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Categories</h4>
-						  <?php $type= App\TypeProduct::getTypeProDuct()->get()->toArray();?>
-						 @foreach($type as $items)
-						 @if($items->parent_id==1)
-							 <div class="tab{{$items->id}}">
-								 <ul class="place">								
-									 <li class="sort">{{$items->name_type}}</li>
-									 <li class="by"><img src="images/do.png" alt=""></li>
-										<div class="clearfix" value="{{$items->id}}"> </div>
-								  </ul>
-								 <div class="single-bottom">						
-										
-							     </div>
-						      </div>
-						 @endif						  
-						@endforeach
-
-						  <!--script-->
-						<script>
-
-							$(document).ready(function(){
-								$(".tab1 .single-bottom").hide();
-								$(".tab2 .single-bottom").hide();
-								$(".tab3 .single-bottom").hide();
-								$(".tab4 .single-bottom").hide();
-								$(".tab5 .single-bottom").hide();
-								
-								$(".tab1 ul").click(function(){
-									$(".tab1 .single-bottom").slideToggle(300);
-									$(".tab2 .single-bottom").hide();
-									$(".tab3 .single-bottom").hide();
-									$(".tab4 .single-bottom").hide();
-									$(".tab5 .single-bottom").hide();
-								})
-								$(".tab2 ul").click(function(){
-									$(".tab2 .single-bottom").slideToggle(300);
-									$(".tab1 .single-bottom").hide();
-									$(".tab3 .single-bottom").hide();
-									$(".tab4 .single-bottom").hide();
-									$(".tab5 .single-bottom").hide();
-								})
-								$(".tab3 ul").click(function(){
-									$(".tab3 .single-bottom").slideToggle(300);
-									$(".tab4 .single-bottom").hide();
-									$(".tab5 .single-bottom").hide();
-									$(".tab2 .single-bottom").hide();
-									$(".tab1 .single-bottom").hide();
-								})
-								$(".tab4 ul").click(function(){
-									$(".tab4 .single-bottom").slideToggle(300);
-									$(".tab5 .single-bottom").hide();
-									$(".tab3 .single-bottom").hide();
-									$(".tab2 .single-bottom").hide();
-									$(".tab1 .single-bottom").hide();
-								})	
-								$(".tab5 ul").click(function(){
-									$(".tab5 .single-bottom").slideToggle(300);
-									$(".tab4 .single-bottom").hide();
-									$(".tab3 .single-bottom").hide();
-									$(".tab2 .single-bottom").hide();
-									$(".tab1 .single-bottom").hide();
-								})	
-							});
-						</script>
-						<!-- script -->					 
-				 </section>
-				 <section  class="sky-form">
-					 <h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>DISCOUNTS</h4>
-					 <div class="row row1 scroll-pane">
-						 <div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Upto - 10% (20)</label>
-						 </div>
-						 <div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>40% - 50% (5)</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>30% - 20% (7)</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>10% - 5% (2)</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Other(50)</label>
-						 </div>
-					 </div>
-				 </section> 				  
-				 <section  class="sky-form">
-						<h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Price</h4>
-							<ul class="dropdown-menu1">
-								 <li><a href="">								                
-								<div id="slider-range"></div>							
-								<input type="text" id="amount" style="border: 0; font-weight: NORMAL;   font-family: 'Arimo', sans-serif;" />
-							 </a></li>			
-						  </ul>
-				   </section>
-				   <!---->
-					 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-					 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
-					<script type='text/javascript'>//<![CDATA[ 
-					$(window).load(function(){
-					 $( "#slider-range" ).slider({
-								range: true,
-								min: 0,
-								max: 400000,
-								values: [ 2500, 350000 ],
-								slide: function( event, ui ) {  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-								}
-					 });
-					$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-
-					});//]]>  
-
-					</script>
-					<section  class="sky-form">
-						<h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Type</h4>
-							<div class="row row1 scroll-pane">
-								<div class="col col-4">
-									<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Sofa Cum Beds (30)</label>
-								</div>
-								<div class="col col-4">
-									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Dinner Sets   (30)</label>
-									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>3+1+1 Sofa Sets (30)</label>
-									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Sofa Chairs     (30)</label>
-									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>2 Seater Sofas  (30)</label>
-									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Display Units   (30)</label>
-									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>L-shaped Sofas  (30)</label>
-									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>3 Seater Sofas  (30)</label>
-								</div>
-							</div>
-				   </section>
-				 <section  class="sky-form">
-						<h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Brand</h4>
-							<div class="row row1 scroll-pane">
-								<div class="col col-4">
-									<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Roadstar</label>
-								</div>
-								<div class="col col-4">
-									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Tornado</label>
-									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Kissan</label>
-									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Oakley</label>
-									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Manga</label>
-									<label class="checkbox"><input type="checkbox" name="checkbox" ><i></i>Wega</label>
-									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Kings</label>
-									<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Zumba</label>
-								</div>
-							</div>
-				   </section>			  									 			 
-			   </div>
-		</div>	     				
+			@include('pages.menuleft')     				
 		     <div class="clearfix"></div>
 	  </div>	 
 </div>

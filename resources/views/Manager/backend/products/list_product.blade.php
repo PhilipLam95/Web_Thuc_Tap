@@ -201,8 +201,8 @@
                                             <th>ID</th>
                                             <th style="width:200px">Tên Sản phẩm</th>
                                              <th style="width: 100px">Số lượng Nhập</th>
-                                            <th>Gía bán</th>
                                             <th>Gía Nhập</th>
+                                            <th>Gía bán</th>
                                             <th style="width:40px">Trạng thái</th>
                                             <th>Xóa</th>
                                             <th>Sửa</th>
@@ -306,15 +306,6 @@
            
             <!-- /.row -->
  </div>
-
-
-
-{{-- Add Product --}}
-    
-        
-    
-
-{{-- End Add --}}
 
 <script type="text/javascript">
 $('#status').on('change',function(e)

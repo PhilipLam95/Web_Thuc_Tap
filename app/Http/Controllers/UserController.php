@@ -12,6 +12,8 @@ use Auth;
 use App\User;
 use Mail;
 use Socialite;
+use App\Cart;
+use Session;
 // use Laravel\Socialite\Facades\Socialite;
 
 
@@ -101,6 +103,7 @@ class UserController extends Controller
     public function logout()
     {
         Auth::logout();
+        Session::forget('cart');
         return redirect()->route('index');
     }
 

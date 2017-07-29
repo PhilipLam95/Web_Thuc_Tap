@@ -24,7 +24,8 @@ class ImportController extends Controller
         $types = TypeProduct::findTypeProductByIdPar()->get();
     	return view('Manager.backend.warehouse.addnew',['id'=>$id,'types'=>$types]);
     }
-    public function postAdd(Request $request) {
+    public function postAdd(Request $request) 
+    {
         $fileName = "";
         $fildName2 ="";
         $fileName3 = "";

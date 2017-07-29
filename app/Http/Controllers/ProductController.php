@@ -30,6 +30,9 @@ class ProductController extends Controller
     	return view('pages.type_product',['products'=>$products,'categories'=>$categories]);
     }
 
+
+    
+
      /// Trang quan tri
     public function getProduct()
     {

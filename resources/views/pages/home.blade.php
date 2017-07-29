@@ -138,9 +138,9 @@
 				         @if($best_pro->unit_price == 0)
 				         <p >GIá liên hệ:<a style="color:red"> 0985668449</a></p>
 				         @else
-				         <p>{{number_format($best_pro->unit_price)}} VND</p>
+				         <p name="unit_price">{{number_format($best_pro->unit_price)}} VND</p>
 				         @endif
-				         <a class="add-cart" href="" style="">Mua Ngay</a>
+				         <a class="add-to-cart"  style="" value={{ $best_pro->id_product}}>Mua Ngay</a>
 			        </div>
 		       </div>
 		     @endforeach
@@ -172,28 +172,9 @@
 
 		         </li>
 		       @endforeach
-		         <!-- <li>
-		           <a href="products.html"><img src="images/r2.jpg" alt=""/></a>  
-		           <h4><a href="products.html">Elite Diwan Seater</a></h4>  
-		           <p>ID: KS3989</p>
-		         </li>
-		         <li>
-		           <a href="products.html"><img src="images/r3.jpg" alt=""/></a>
-		           <h4><a href="products.html">Dior Corner Sofa</a></h4>  
-		           <p>ID: KS3989</p>
-		         </li>
-		         <li>
-		           <a href="products.html"><img src="images/r4.jpg" alt=""/></a>
-		           <h4><a href="products.html">Alia Modular Sofa</a></h4> 
-		           <p>ID: KS3989</p>
-		         </li>
-		         <li>
-		           <a href="products.html"><img src="images/r5.jpg" alt=""/></a>  
-		           <h4><a href="products.html">King Size Bed</a></h4> 
-		           <p>ID: KS3989</p>           
-		         </li> -->
 		        </ul>
-		      <script type="text/javascript">
+		     <script type="text/javascript" src="js/jquery.flexisel.js"></script>
+		     <script type="text/javascript">
 		       $(window).load(function() {      
 		        $("#flexiselDemo1").flexisel({
 		        visibleItems: 5,
@@ -219,7 +200,7 @@
 		      });
 		      });
 		      </script>
-		      <script type="text/javascript" src="js/jquery.flexisel.js"></script>       
+       
 		   </div>
 		   </div>
 		</div>

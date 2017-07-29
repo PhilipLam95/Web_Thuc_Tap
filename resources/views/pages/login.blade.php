@@ -3,7 +3,7 @@
 <div class="login_sec">
 	 <div class="container">
 		 <ol class="breadcrumb">
-		  <li><a href="index.html">Home</a></li>
+		  <li><a href="{{route('index')}}">Home</a></li>
 		  <li class="active">Login</li>
 		 </ol>
 		 <h2 style="">Login</h2>
