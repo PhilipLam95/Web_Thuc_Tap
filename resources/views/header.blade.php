@@ -139,7 +139,7 @@
               </div>
             </div>
           </li>       
-          <li class="grid4"><a class="color5" href="#">TIN TỨCc</a>
+          <li class="grid4"><a class="color5" href="#">TIN TỨCccccccs</a>
           </li>
           <li class="grid5"><a class="color6" href="{{route('introduce')}}">GIỚI THIỆU</a>
           </li>       
