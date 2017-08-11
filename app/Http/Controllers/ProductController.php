@@ -30,7 +30,12 @@ class ProductController extends Controller
     	return view('pages.type_product',['products'=>$products,'categories'=>$categories]);
     }
 
+    public function countRedisualQty($id) // lay so luong con lai trong kho hang
+    {
+        $products = Product::findRedisualQty($id)->get();
+        return response()->json($products); 
 
+    }
     
 
      /// Trang quan tri
@@ -85,6 +90,60 @@ class ProductController extends Controller
         return redirect('dashboard/list_products')->with(['flash_level'=>'success','flash_message'=>'Xóa sản phẩm thành công!!!']);
     }
 
+    public function getUpdate($id)
+    {
+        $types = TypeProduct::findTypeProductByIdPar()->get();// tìm sản phẩm theo nội thất
+        $products = Product::findProdutwithId($id)->first();
+        $type_cha = TypeProduct::findOne($products->parent_id)->id;
+       
+        return view('Manager.backend.products.update_product',['products'=>$products,'types'=>$types,'type_cha'=>$type_cha]);
+    }
+
+    public function postUpdate($id,Request $request)
+    {
+            $name = $request->name;
+            $type = $request->type;
+            $type_child = $request->type_child;
+            $description = $request->description;
+            $sale_price = $request->sale_price;
+            $materia = $request->Materia;
+            $size = $request->size;
+       
+                  
+            Product::edit($id,$name,$type,$type_child,$description,$sale_price,$materia,$size);
+            if (!is_null(Input::file('image')) && Input::file('image')->isValid()) 
+            {
+                File::delete('images/'.$request->currentImage);
+                $fileName = Input::file('image')->getClientOriginalName();
+                Input::file('image')->move(base_path().'images/',$fileName);
+                Product::addImage($id,$fileName);
+            }
+            if (!is_null(Input::file('image2')) && Input::file('image2')->isValid())
+             {
+                File::delete('images/'.$request->currentImage2);
+                $fileName2 = Input::file('image2')->getClientOriginalName();
+                Input::file('image2')->move(base_path().'images/',$fileName2);
+                Product::addImage2($id,$fileName2);
+            }
+            if (!is_null(Input::file('image3')) && Input::file('image3')->isValid()) 
+            {
+                File::delete('images/'.$request->currentImage3);
+                $fileName3 = Input::file('image3')->getClientOriginalName();
+                Input::file('image3')->move(base_path().'images/',$fileName3);
+                Product::addImage3($id,$fileName3);
+            }
+   
+        
+       
+        return redirect('dashboard/list_products')->with(['flash_level'=>'success','flash_message'=>'Chỉnh sửa sản phẩm thành công!!!']);
+    }
+
+    public function select_product($id)
+    {
+        $products = Product::findproduct($id)->get();
+        return response()->json($products); 
+        
+    }
  
 
 

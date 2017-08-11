@@ -85,25 +85,22 @@
 								  	Gía liên hệ :<li class="active"><a1 style="color: red">0985668449</a1></li>
 								  </h3>
 								 @endif
-								 <a href="#">BUY NOW</a>
+								 <a id="muahang" class="add-to-cart" value ="{{ $products->id_product}}"  data="{{ $products->id_product}}" style="color:red">BUY NOW</a>
 							 </ul>
 						 </div>
 						 <div class="check">
 						 	@if($products->unit_price!=0)
 							 <p>
 							 	<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-							 	<a> Số lượng còn: </a>
+							 	<a id="soluong{{$products->id_product}}" value ="{{$products->redisual_quantity}}"> Số lượng còn: {{$products->import_quantity}} </a>
 							 </p>
 							@endif
-							 <form class="navbar-form navbar-left" role="search">
-								  <div class="form-group">
-									<input type="text"  class="form-control" disabled="" placeholder="{{$products->import_quantity}}">
-								  </div>
-								 
-							 </form>
+							 
 						 </div>
 						 <div class="clearfix"></div>
 					  </div>
+
+
 					  <div class="item-list">
 						 <ul>
 							 <li>Material: Solid Wood</li>
@@ -141,4 +138,26 @@
 		     <div class="clearfix"></div>
 	  </div>	 
 </div>
+<script type="text/javascript">
+$("#muahang").hover(
+    function () {
+        $(this).removeClass("add-to-cart");
+        $(this).css("cursor","pointer")
+        
+    }, 
+
+    function () {
+        $(this).find("span:last").remove();
+    }
+);
+
+$("#muahang").mouseout(function(){
+  $(this).addClass("add-to-cart");
+
+
+
+});
+//li with fade class
+$("li.fade").hover(function(){$(this).fadeOut(100);$(this).fadeIn(500);});
+</script>
 @endsection

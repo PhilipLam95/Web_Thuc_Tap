@@ -132,7 +132,22 @@
 		Route::get('cart_detail',
 			['as'=>'cart_detail',
 			 'uses'=>'CartController@show_cart']);
+		//--------------------Đếm số lượn hàng trong kho-------------------------------------------------------
+
+		Route::get('countRedisualQty/{id}',
+			['as'=>'redisual',
+			'uses'=>'ProductController@countRedisualQty']);
 		//---------------------------------------------------------------------------
+
+		//------------------------------checkout--------------------------------
+		Route::get('checkout',
+			['as'=>'checkout',
+			'uses'=>'HomeController@checkout']);
+		Route::post('checkout-post',
+			['as'=>'checkout_post',
+			'uses'=>'HomeController@postCheckout']);
+		//---------------------------------------------------------------------------
+
 //------------------------------------------------------------------------------------------------------------------------
 Route::group(['prefix' => 'dashboard'],function()  // 
 {
@@ -171,6 +186,11 @@ Route::group(['prefix' => 'dashboard'],function()  //
     	Route::get('product/{id}/unapprove',['as'=>'unaccept_pro','uses'=>'ProductController@unacceptProduct']);
 		Route::post('product/add',['as'=>'addProDuct','uses'=>'ProductController@postAdd']);
 		Route::get('product/{id}/remove',['as'=>'deletePro','uses'=>'ProductController@remove']);
+		Route::get('product/{id}/approve',['as'=>'accept_pro','uses'=>'ProductController@acceptProduct']);
+		Route::get('product/update/{id}',['as'=>'updateProduct','uses'=>'ProductController@getUpdate']);
+		Route::post('product/update/{id}',['as'=>'updateProduct','uses'=>'ProductController@postUpdate']);
+
+
 
 
 			//------------------------------------kho-------------------------------------// 
@@ -178,7 +198,53 @@ Route::group(['prefix' => 'dashboard'],function()  //
 			//Them san moi vao kho
 		Route::get('warehouse/add',['as'=>'getadd_new_wareproduct','uses'=>'ImportController@getAdd']);
 		Route::post('warehouse/add',['as'=>'postadd_new_wareproduct','uses'=>'ImportController@postAdd']);
-			//-------------------
+
+		Route::get('warehouse/{id}/import',['as'=>'get_import_ware','uses'=>'ImportController@getImport']);
+		Route::get('select_product/{id}',['as'=>'select_product','uses'=>'ProductController@select_product']);
+		Route::post('warehouse/{id}/import',['as'=>'post_import_ware','uses'=>'ImportController@postImport']);
+
+
+			//--------------------------------------------------------------\
+
+		//------------------------------------Loại nội thất-------------------------------------// 
+		Route::get('list_bigtype',['as'=>'big_type','uses'=>'CategoryController@listType']);
+		Route::get('big_type/add',['as'=>'add_big_types','uses'=>'CategoryController@getAdd']);
+		Route::post('big_type/add',['as'=>'add_big_types','uses'=>'CategoryController@postAdd']);
+		Route::get('big_type/update/{id}',['as'=>'update_big_type','uses'=>'CategoryController@getUpdate']);
+		Route::post('big_type/update/{id}',['as'=>'update_big_type','uses'=>'CategoryController@postUpdate']);
+		//--------------------------------------------------------------------------------------------\
+
+		//------------------------------------Loại sản phẩm-------------------------------------// 
+		Route::get('list_smalltype',['as'=>'small_type','uses'=>'CategoryController@listSmallType']);
+		Route::get('small_type/add',['as'=>'add_small_types','uses'=>'CategoryController@getAddsmallType']);
+		Route::post('small_type/add',['as'=>'add_small_types','uses'=>'CategoryController@postAddsmallType']);
+		Route::get('small_type/update/{id}',['as'=>'update_small_type','uses'=>'CategoryController@getUpdatesmallType']);
+		Route::post('small_type/update/{id}',['as'=>'update_small_type','uses'=>'CategoryController@postUpdatesmallType']);
+		//--------------------------------------------------------------------------------------------\
+
+		//------------------------------------Danh sách Nhân viên------------------------------------// 
+		Route::get('list_employee',['as'=>'employee','uses'=>'AdminController@ListEmployee']);
+		Route::get('employee/add',['as'=>'add_employ','uses'=>'AdminController@getAddEmployee']);
+		Route::post('employee/add',['as'=>'add_employ','uses'=>'AdminController@postAddEmployee']);
+		Route::get('employee/update/{id}',['as'=>'update_employ','uses'=>'AdminController@getUpdateEmployee']);
+		Route::post('employee/update/{id}',['as'=>'update_employ','uses'=>'AdminController@postUpdateEmployee']);
+		//--------------------------------------------------------------------------------------------\
+
+		//------------------------------------Danh sách Admin------------------------------------// 
+		Route::get('list_admin',['as'=>'admin','uses'=>'AdminController@ListAdmin']);
+		Route::get('admin/add',['as'=>'add_admin','uses'=>'AdminController@getAddAdmin']);
+		Route::post('admin/add',['as'=>'add_admin','uses'=>'AdminController@postAddAdmin']);
+		Route::get('admin/update/{id}',['as'=>'update_admin','uses'=>'AdminController@getUpdateAdmin']);
+		Route::post('admin/update/{id}',['as'=>'update_admin','uses'=>'AdminController@postUpdateAdmin']);
+		//--------------------------------------------------------------------------------------------\
+
+		//------------------------------------Danh sách Khách hàng------------------------------------// 
+		Route::get('list_customer',['as'=>'customer','uses'=>'AdminController@ListCustomer']);
+		Route::get('admin/add',['as'=>'add_admin','uses'=>'AdminController@getAddAdmin']);
+		Route::post('admin/add',['as'=>'add_admin','uses'=>'AdminController@postAddAdmin']);
+		Route::get('admin/update/{id}',['as'=>'update_admin','uses'=>'AdminController@getUpdateAdmin']);
+		Route::post('admin/update/{id}',['as'=>'update_admin','uses'=>'AdminController@postUpdateAdmin']);
+		//--------------------------------------------------------------------------------------------\
 
 		// Route::get('warehouse/add/id',['as'=>'add_old_wareproduct','uses'=>'ImportController@']);//Nhập thêm số lượng cho sản phẩm cũ
 	});

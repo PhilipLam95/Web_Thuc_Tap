@@ -10,6 +10,10 @@ use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use App\Cart;
 use App\TypeProduct;
+use Session;
+use App\Customer;
+use App\Bill;
+use App\BillDetail;
 use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller
@@ -61,5 +65,65 @@ class HomeController extends Controller
       $queryString = '/search?keyword='.$request->keyword;
       return redirect($queryString);
    }
+
+   public function checkout()
+   {
+   
+      if(Session::has('cart'))
+        {
+            $oldCart = Session::get('cart');
+            $cart = new Cart($oldCart);
+            return view('pages.checkout',['product_cart'=>$cart->items,'totalPrice'=>$cart->totalPrice,'totalQty'=>$cart->totalQty]);
+
+         }
+      else
+      {
+        return view('pages.checkout');
+      }
+   }
+
+   public function postCheckout(Request $req)
+   {
+        $cart = Session::get('cart');
+
+            $customer=Customer::where('email',$req->email)->first();
+                  if($customer)
+                  {
+                    
+                  }
+                  else
+                  {
+                    $customer= new Customer;
+                    $customer->full_name=$req->full_name;
+                    $customer->email=$req->email;
+                    $customer->address=$req->address;
+                    $customer->phone=$req->phone;
+                    $customer->save();
+                  }
+                  $bill = new Bill;
+                  $bill->id_customer = $customer->id;
+                  $bill->status = 1;
+                  $bill->method = $req->PaymentMethodId;
+                  $bill->note = $req->note;
+                  $bill->save();
+
+                  foreach($cart->items as $key=>$value)
+                  {
+                    $bill_detail = new BillDetail;
+                    $bill_detail->id_bill = $bill->id;
+                    $bill_detail->id_product = $key;//$value['item']['id'];
+                    $bill_detail->quantity = $value['qty'];
+                    $bill_detail->sales_price = $value['price'];
+                    $bill_detail->save();
+                  }
+        Session::forget('cart');
+        return  redirect()->back()->with('thanhcong',"Đặt hàng thành công");
+     
+            
+            
+       
+   }
+
+
 
 }

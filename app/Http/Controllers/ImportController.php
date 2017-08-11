@@ -50,4 +50,18 @@ class ImportController extends Controller
 
         return redirect()->back()->with('thanhcong','Thêm sản phẩm thành công');
     }
+
+    public function getImport($id)
+    {
+        $products = Product::findproduct($id)->first();
+       return view('Manager.backend.warehouse.import_ware',['products'=>$products]); 
+    }
+
+    public function postImport($id,Request $request)
+    {   
+        $import_quantity = $request ->import_quantity;
+        $import_price = $request ->import_price;
+        Import_Product::import($id,$import_quantity,$import_price);
+        return redirect('dashboard/warehouse')->with('thanhcong','Nhập kho thành công');
+    }
 }

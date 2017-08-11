@@ -9,13 +9,18 @@ use Illuminate\Http\Request;
 class Product extends Model
 {
     protected $table = "products";
-    protected $fillable = ['id','name','id_type','description','unit_price','sale_quantity','image','unit','Material','view','id_par','contact_price','status_pro'];
+    protected $fillable = ['id','name','id_type','description','unit_price','sale_quantity','image','image2','image3','unit','Material','view','id_par',
+    'status_pro'];
     public $timestamps = true;
 
+    public static function findRedisualQty($id)// tìm so luong sản phẩm còn theo id cho giỏ hàng
+    {
+        $products = DB::table('import_product')->where('import_product.id_product','=',$id);
+        return $products;
+    }
 
-    
 
-    public static function getProducts()  // lấy sản phẩm 
+    public static function getProducts()  // lấy sản phẩm  mới 
     {
         $products = DB::table('products')->where('status_pro',1)->orderBy('id','desc');
         return $products;
@@ -37,7 +42,7 @@ class Product extends Model
         return $products;
     }
 
-    public static function findProDuctById($id) // chi tiết sản phẩm
+    public static function findProDuctById($id) // chi tiết sản phẩm->moi khi user nhap xem chi tiet, view +1
     {
         $view = DB::table('products')->where('products.id','=',$id)->select('view')->get();
             $view=$view[0]->view;
@@ -134,6 +139,14 @@ class Product extends Model
         return $product->id;
     }
 
+    public static function findProdutwithId($id)
+    {
+         $products = DB::table('products')->join('import_product','products.id','=','import_product.id_product')
+                                            ->join('category','products.id_type','=','category.id')
+                                        ->where('products.id',$id);    
+        return $products;
+    }
+
     public static function acceptProducts($id)
     {
         DB::table('products')
@@ -162,6 +175,53 @@ class Product extends Model
         DB::table('products')->where('id','=',$id)->delete();
     }
 
+    public static function edit($id,$name,$type,$type_child,$description,$sale_price,$materia,$size)
+    {
+      DB::table('products')->where('id',$id)
+                    ->update([
+                                'name' => $name,
+                                'id_type' => $type_child,
+                                'description' => $description,
+                                'unit_price' => $sale_price,
+                                'Materia' => $materia,
+                                'id_par' => $type,
+                                'size' => $size
+                                ]);
+        DB::table('import_product')->where('id_product','=',$id)
+                                ->update([
+                                    'Name_product' => $name
+                                    ]);
+    }
+
+    public static function addImage($id,$imageName) {
+            DB::table('products')->where('id',$id)
+                            ->update([
+                                'image' => $imageName
+                                ]);
+    }
+
+    public static function addImage2($id,$imageName) {
+            DB::table('products')->where('id',$id)
+                            ->update([
+                                'image2' => $imageName
+                                ]);
+    }
+
+
+    public static function addImage3($id,$imageName) {
+            DB::table('products')->where('id',$id)
+                            ->update([
+                                'image3' => $imageName
+                                ]);
+    }
+
+    public static function findproduct($id)
+    {
+        $product = DB::table('products')->join('import_product','products.id','=','import_product.id_product')
+                                        ->join('category','products.id_type','=','category.id')
+                                        ->where('products.id',$id);
+        return $product;
+    }
     
 
     

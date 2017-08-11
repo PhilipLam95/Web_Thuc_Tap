@@ -23,9 +23,15 @@
     <!-- Morris Charts CSS -->
     <link href="admin/vendor/morrisjs/morris.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="ssi-modal/styles/ssi-modal.css"/>
+
     <!-- Custom Fonts -->
     <link href="admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="admin/modal.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="ckeditor/ckeditor.js"></script>
+     {{-- ssi-modal --}}
+     <script src="ssi-modal/js/ssi-modal.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -87,6 +93,9 @@
 
     
 
+
+
+
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
     $(document).ready(function() {
@@ -94,6 +103,46 @@
             responsive: true
         });
     });
+
+        $('#type').on('change',function(e)
+        {
+            console.log(e);
+            var id =  e.target.value;
+
+            //ajax
+            $.get('dashboard/select_typechild/'+id,function(data){
+
+            $('#show_product').empty();
+            $.each(data,function(key,value){
+                console.log(data);
+            $('#show_product').append('<option value="'+value.id+'">'+value.name_type+'</option>')
+            });
+            });
+        })
+
+        $('#name').on('change',function(e)
+        {
+            var id = e.target.value;
+            var route = "{{route('post_import_ware','id_sp')}}"; 
+            route = route.replace('id_sp',id);
+            $.get('dashboard/select_product/'+id,function(data)
+            {
+                $('.soluong_nhap').empty();
+                $('.loai_sanpham').empty();
+                $('.nhap').empty();
+                $('.gia_nhap').empty();
+                $.each(data,function(key,value)
+                {
+                    console.log(data);
+                    $('.soluong_nhap').append('<input  class="form-control" name="import_quantity" value="'+value.import_quantity+'" placeholder="Số lượng nhập"  />');
+                    $('.loai_sanpham').append('<input  class="form-control" name="type_child" placeholder="Loai sản phẩm" value="'+value.name_type+'" disabled="" />');
+                    $('.gia_nhap').append('<input  class="form-control" name="import_price" value="'+value.import_price+'" placeholder="Gía nhập"  required="" />');
+                    $('.nhap').append('<a href="'+ route+'" style="color:white;margin-right:10px;margin-top:-30px;" class="btn btn-primary" >Nhập</a>')
+
+
+                });
+            });
+        })
     </script>
     <script>
 // Get the modal

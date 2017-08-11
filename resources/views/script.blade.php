@@ -8,6 +8,7 @@
 <script type="text/javascript" src="js/responsiveslides.min.js"></script>
 <script type="text/javascript" src="js/simpleCart.min.js"></script>
 <script type="text/javascript" src="js/jquery.flexisel.js"></script> 
+
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
 <script type="text/javascript"> // liet ke san pham
   $(document).ready(function(e)

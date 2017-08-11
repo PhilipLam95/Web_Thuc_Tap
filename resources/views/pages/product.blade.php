@@ -22,18 +22,23 @@
 								<div class="b-wrapper">
 									<h4 class="b-animate b-from-left  b-delay03">							
 										<button class="btns">
-										<span class="glyphicon glyphicon-eye-open" aria-hidden="true" ></span>Quick Vie</button>
+										<span class="glyphicon glyphicon-eye-open" aria-hidden="true" ></span>Quick View</button>
 									</h4>
 								</div>
+								<div class="alert alert-success thanhcong{{$all_pro->id_product}}" style="display: none;"></div>
+		       					<div class="alert alert-danger thatbai{{$all_pro->id_product}}" style="display: none;"></div>
 							</div>
 						</a>						
 						<div class="product-info simpleCart_shelfItem">
 							<div class="product-info-cust prt_name" >
 								<h4 style="color: #802b00">{{$all_pro->name}}</h4>
 								<p style="color: #802b00" >ID: {{$all_pro->id_product}}</p>
-								<span class="item_price" style="color: #802b00">{{number_format($all_pro->unit_price)}} VND</span>								
-								<input class="item_quantity" value="1" type="text">
-								<a href="single.html"><input class="item_add items" value="ADD" type="button"></a>
+								<span class="item_price" style="color: #802b00">{{number_format($all_pro->unit_price)}} VND</span>		
+								 <a type="hidden" id="soluong{{$all_pro->id_product}}" value ="{{$all_pro->redisual_quantity}}"> </a>	
+								<div class="add-to-cart" data ="{{$all_pro->id_product}}" >
+										<input class="item_add items"  value="ADD"   type="button"> 
+								</div>
+	
 							</div>													
 							<div class="clearfix"> </div>
 						</div>

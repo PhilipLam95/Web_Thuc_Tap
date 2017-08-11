@@ -33,8 +33,27 @@ class Import_Product extends Model
         $import->id_product = $x;
        	$import->Name_Product = $name_product;
        	$import->import_price = $import_price;
+        $import->redisual_quantity = $import_quantity;
        	$import->import_quantity = $import_quantity;
         $import->save();
         return $import->id;
+    }
+
+    public static function import($id,$import_quantity,$import_price)
+    {
+        $import_quantity_product = DB::table('import_product')->where('id_product',$id)
+                                    ->select('import_quantity')->get();
+        $redisual_quantity_product = DB::table('import_product')->where('id_product',$id)
+                                    ->select('redisual_quantity')->get();         
+        $import_quantity_product=$import_quantity_product[0]->import_quantity;
+        $redisual_quantity_product=$redisual_quantity_product[0]->redisual_quantity;
+
+
+        DB::table('import_product')->where('id_product',$id)
+                                ->update([
+                                        'import_price' => $import_price,
+                                        'import_quantity' => ( $import_quantity_product + $import_quantity), 
+                                        'redisual_quantity' =>($redisual_quantity_product + $import_quantity)                          
+                                    ]);
     }
 }

@@ -32,6 +32,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="css/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" type="text/css" href="css/mystyle.css">
+<link rel="stylesheet" type="text/css" href="css/styleofme.scss">
+<link rel="stylesheet" type="text/css" href="css/checkoutstyle.css" />
+
+
+
+
+
+
+  
+ 
 
 @include('script')
 
@@ -54,10 +64,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   
 $('.add-to-cart').click(function()
   {
-     var id = $(this).attr('value');
+     var id = $(this).attr('data');
      var route = "{{route('buy','id_sp')}}"; 
      route = route.replace('id_sp',id);
 
+     var route1="{{route('delete-1-item','id_sp')}}";
+     route1 = route1.replace('id_sp',id);
+     var qty = parseInt($('#soluong'+id).attr('value'));
      $.ajax({
       url:route,
             type: "GET",
@@ -65,17 +78,72 @@ $('.add-to-cart').click(function()
             data:{id,id},   
             success:function(data)
             { 
+                    
+                  
+                    if(data.items[id]['qty']< qty)
+                    {
+                           
+                          $('#simpleCart_quantity').html(data.totalQty);
+                          $('#simpleCart_quantity').attr('value',data.totalQty);
+                          $('.thanhcong'+id).css('font-size','15px');
+                          $('.thanhcong'+id).fadeIn();
+                          $('.thanhcong'+id).html("Đã thêm mặt hàng này vào giỏ hàng");
+                          $('.thanhcong'+id).fadeOut(1000);
+                             
+                         /* If shopping cart is still open, items will appear on it at the same time of adding them */
+                         
+                          return;
+                    }
+                    
+                    if(data.items[id]['qty']== qty || data.items[id]['qty']> qty)
+                    {
+                      alert("Mặt hàng này ban mua đã vượt quá số lượng trong kho");
+                      $.ajax({
+                          url:route1,
+                          type: "GET",
+                          dataType:"json",
+                          data:{id,id},
+                          success:function(data)
+                          { 
+                           
+                            return;
+                          }
+                      });
+
+                    }
+
+                    
               
-              $('#simpleCart_quantity').html(data.totalQty);
-              $('#simpleCart_quantity').attr('value',data.totalQty);
-               /* If shopping cart is still open, items will appear on it at the same time of adding them */
-                if($(".shopping_cart_holder").css("display") == "block"){ // Check if shopping cart is open 
-                    $(".shopping_cart_info").trigger( "click" );  // update cart on event
-                }
+            },
+            error:function()
+            {
+              alert("lỗi thêm sản phẩm");
             }   
      })
   });
+
+$("#muahang").hover(
+    function () {
+        $(this).removeClass("add-to-cart");
+        $(this).css("cursor","pointer")
+        
+    }, 
+
+    function () {
+        $(this).find("span:last").remove();
+    }
+);
+
+$("#muahang").mouseout(function(){
+  $(this).addClass("add-to-cart");
+
+
+
+});
+
 </script>
+
+
 <!---->
   
 <!---->

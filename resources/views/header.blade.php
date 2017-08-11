@@ -1,25 +1,25 @@
 
 <?php  
-			function subMenu($data,$id)
-			{
-				echo "<ul>";
-				foreach($data as $items)
-				{
-					if($items->parent_id == $id)
-					{
-					echo '<li  ><a style="color:#b33c00" href="/../../Web_Thuc_Tap/public/type/'.$items->id.'"> '.$items->name_type.' </a>';
+      function subMenu($data,$id)
+      {
+        echo "<ul>";
+        foreach($data as $items)
+        {
+          if($items->parent_id == $id)
+          {
+          echo '<li  ><a style="color:#b33c00" href="/../../Web_Thuc_Tap/public/type/'.$items->id.'"> '.$items->name_type.' </a>';
           subMenu($data,$items->id);
           echo "</li>";
-						
-					}
+            
+          }
 
-				}
+        }
 
-				echo "</ul>";
+        echo "</ul>";
 
 
 
-			}
+      }
 
 ?>
 <div  >
@@ -76,14 +76,20 @@
         @endif 
          </div>
          <div class="cart box_1">
-          <a href="{{route('cart_detail')}}">
-          @if(Session::has('cart'))
-            <h3> <span class="cart" style="padding-left: 20px"></span> (<span id="simpleCart_quantity" value="{{Session('cart')->totalQty}}" >{{Session('cart')->totalQty}}</span> sản phẩm)<img src="images/bag.png" alt=""></h3>
-          @else
-             <h3> <span class="cart" style="padding-left: 20px"></span> (<span id="simpleCart_quantity" >0</span> sản phẩm)<img src="images/bag.png" alt=""></h3>
             
-          @endif
-          </a> 
+          <div class="dropdown">
+              <a href="{{route('cart_detail')}}">
+              @if(Session::has('cart'))
+                <h3> <span class="cart" style="padding-left: 20px"></span> (<span id="simpleCart_quantity" value="{{Session('cart')->totalQty}}" >{{Session('cart')->totalQty}}</span> sản phẩm)<img src="images/bag.png" alt=""></h3>
+              @else
+                 <h3> <span class="cart" style="padding-left: 20px"></span> (<span id="simpleCart_quantity" >0</span> sản phẩm)<img src="images/bag.png" alt=""></h3>
+                
+              @endif
+              </a> 
+              <div class="dropdown-content">
+                <p >This is cart of you. Click to view detail cart</p>
+              </div>
+          </div>
                  <!-- p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p> -->
     
           <div class="clearfix"> </div>
@@ -97,35 +103,34 @@
        <div class="menu_sec">
        <!-- start header menu -->
        <ul class="megamenu skyblue" >
-         <li class="grid1"><a class="color1" href="{{route('index')}}">TRANG CHỦ</a></li>
-         <li class="grid2">
+         <li class="grid" style="display: inline;" "><a class="color1" href="{{route('index')}}">TRANG CHỦ</a></li>
+         <li class="grid">
             <a class="color2" href="{{route('new_product')}}">TẤT CẢ SẢN PHẨM</a> 
           </li>
-        	<li class="grid3 "><a class="color4" >SẢN PHẪM GỖ PHÙ HỢP</a>
+          <li ><a class="color4" >SẢN PHẪM GỖ PHÙ HỢP</a>
             <div class="megapanel">
 
-              <div class="row" style="text-align: center">
-                <?php $type= App\TypeProduct::getTypeProDuct()->get()->toArray();
+              <div class="row"  >
+                  <?php 
+                      $type= App\TypeProduct::where('parent_id',1)->get();
+                      $type_childs = App\TypeProduct::where('parent_id','>',1)->get();
                     ?>
-              	@foreach($type as $items)
-                  <div class="col1">
-                    <div class="h_nav">
-                     
-        	             @if($items->parent_id == 1)
-        	               <h4 style="color:#993300"><a  href="{!! url('type_par/'.$items->id)!!}" style="color:#802b00;font-weight: bolder;">{!! $items->name_type !!} </a> 
-                           
-                            <?php 
-                              subMenu($type,$items->id);
-                             ?>
-        	                	    
+                @foreach($type as $items)
+                  <div class="col1" >
+                    <div class="h_nav"  >
 
-        	                </h4>
-        	             @endif
-    	     
-    	               
+                         <h4 ><a  href="{!! url('type_par/'.$items->id)!!}" style="color:#802b00;font-weight: bolder;overflow: auto;">{!! $items->name_type !!} </a>
+                          @foreach($type_childs as $type_child) 
+                              @if($type_child->parent_id == $items->id)
+                              <ul>
+                                  <li>
+                                      <a style="color:#b33c00" href="{!! url('type/'.$type_child->id)!!}""> {{ $type_child->name_type }} </a>
+                                  </li>
+                              </ul>
+                              @endif
+                          @endforeach
 
-
-    			             
+                         </h4>
                     </div>              
                   </div>
                 @endforeach
@@ -139,7 +144,7 @@
               </div>
             </div>
           </li>       
-          <li class="grid4"><a class="color5" href="#">TIN TỨCceeeeeeee</a>
+          <li class="grid4"><a class="color5" href="#">TIN TỨCccccccs</a>
           </li>
           <li class="grid5"><a class="color6" href="{{route('introduce')}}">GIỚI THIỆU</a>
           </li>       

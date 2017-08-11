@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('noidung')
 
-
+	<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
 	@for($i=0;$i<count($slides);$i++)
 		@if($i==0)
 			<div class="content">
@@ -131,6 +131,8 @@
 		     <div class="seller-grids">
 		     @foreach($best_pros as $best_pro)
 		       <div class="col-md-3 seller-grid" style="padding-bottom: 30px">
+		       	<div class="alert alert-success thanhcong{{$best_pro->id_product}}" style="display: none;"></div>
+		       	<div class="alert alert-danger thatbai{{$best_pro->id_product}}" style="display: none;"></div>
 		         <a href="{{route('detail',$best_pro->id_product)}}"><img  style="height:150px;width: 150px" src="images/{{$best_pro->image}}" alt=""/></a>
 		         	<div style="color:#4d1a00;">
 				         <h4><a   href="products.html">{{$best_pro->name}}</a></h4>
@@ -140,7 +142,9 @@
 				         @else
 				         <p name="unit_price">{{number_format($best_pro->unit_price)}} VND</p>
 				         @endif
-				         <a class="add-to-cart"  style="" value={{ $best_pro->id_product}}>Mua Ngay</a>
+				         <a type="hidden" id="soluong{{$best_pro->id_product}}" value ="{{$best_pro->redisual_quantity}}"> </a>
+				         <p id="muahang" class="add-to-cart"   value="{{ $best_pro->id_product}}" data="{{ $best_pro->id_product}}">Mua Ngay</>
+				          
 			        </div>
 		       </div>
 		     @endforeach
@@ -154,7 +158,7 @@
 		   <div class="container">
 		     <div class="recmnd-head">
 		       <h3 style="color:#4d1a00" >SẢN PHẨM KHUYẾN NGHỊ CHO BẠN</h3>
-		     </div>
+		     </div>	
 		     <div class="bikes-grids">       
 		       <ul id="flexiselDemo1">
 		       @foreach( $best_views as $best_view)
@@ -168,7 +172,8 @@
 		           	@else
 		           		<p> GIá liên hệ:<a style="color: red">0985668449 </a></p>
 		           	@endif
-		           	<p href="">Mua Ngay</p>
+		           	<p id="muahang{{$best_view->id_product}}" class="add-to-cart" data="{{ $best_view->id_product}}" value ="{{ $best_view->id_product}}" style="color:red">Mua Ngay</p>
+		           	<div class="alert alert-success thanhcong{{$best_view->id_product}}" style="display: none;"></div
 
 		         </li>
 		       @endforeach
@@ -205,5 +210,36 @@
 		   </div>
 		</div>
 <form></form>
+
+<script type="text/javascript">
+$(".add-to-cart").hover(
+    function () {
+        
+         $(this).css("cursor","pointer")
+        
+    }, 
+);
+
+
+
+$("#muahang").hover(
+    function () {
+        $(this).removeClass("add-to-cart");
+        $(this).css("cursor","pointer")
+        
+    }, 
+
+    function () {
+        $(this).find("span:last").remove();
+    }
+);
+
+$("#muahang").mouseout(function(){
+  $(this).addClass("add-to-cart");
+
+
+
+});
+</script>
 		
 @endsection

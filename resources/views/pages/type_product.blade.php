@@ -32,19 +32,25 @@
 										<span class="glyphicon glyphicon-eye-open" aria-hidden="true" ></span>Quick Vie</button>
 									</h4>
 								</div>
+								 	<div class="alert alert-success thanhcong{{$product->id_product}}" style="display: none;"></div>
+		       						<div class="alert alert-danger thatbai{{$product->id_product}}" style="display: none;"></div>
 							</div>
 						</a>						
 						<div class="product-info simpleCart_shelfItem">
 							<div class="product-info-cust prt_name" >
 								<h4 style="color: #802b00">{{ $product->name}}</h4>
-								<p style="color: #802b00" >ID:{{ $product->id}} </p>
+								<p style="color: #802b00" >ID:{{ $product->id_product}} </p>
 								@if($product->unit_price!=0)
 								<span class="item_price" style="color: #802b00">{{number_format($product->unit_price)}}VND</span>
 								@else
 								<p >GIá liên hệ:<a style="color:red"> 0985668449</a></p>	
 								@endif							
-								<input class="item_quantity" value="1" type="text">
-								<a href="single.html"><input class="item_add items" value="ADD" type="button"></a>
+								<a type="hidden" id="soluong{{$product->id_product}}" value ="{{$product->redisual_quantity}}"> </a>
+								<a>
+									<div class="add-to-cart" data ="{{$product->id_product}}" >
+										<input class="item_add items"  value="ADD"   type="button"> 
+									</div>
+								</a>
 							</div>													
 							<div class="clearfix"> </div>
 						</div>

@@ -3,26 +3,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-<div id="myModal" class="modal">
-<!-- Modal content -->
+<!-- <div id="myModal" class="modal" >
     <div class="modal-content">
         <div class="modal-header">
             <span class="close">&times;</span>
-            <h6>Thêm sản phẩm</h6>
+            <h6 style="text-align: center;font-size: 30px">Thêm sản phẩm</h6>
         </div>
         <div class="modal-body">
-            <form id="new_form" enctype="multipart/form-data"  action="{!! url('dashboard/warehouse/add') !!}" method="post">
+            <form id="new_form"   enctype="multipart/form-data"  method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-                    <button type="submit" class="btn btn-primary">Lưu</button>
-                <div style="width: 500px; padding-left: 200px">
-                    <select class="selectpicker form-control" name="status" id="status"  required="">
-                        <option name="" class="" value="">Chon</option>
-                        <option name="" class="" value="1" required="">Hàng đặt</option>
-                        <option name="" class="" value="2" required="">Hàng thành phẩm</option>
-                    </select>
-                </div><br>
-                <div class="row clearfix">
+                <div class="row "learfix" style="padding-top: 15px">
                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                         <label class="name">Tên Sản Phẩm</label>
                     </div>
@@ -155,16 +145,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="row clearfix" style="text-align: center">
+                    <input type="button" class="btn btn-primary" value= "Lưu" onclick="add_pro();">
+                </div>
 
-               
-               
-                
             </form>
         </div>
     
     </div>
-</div>
-
+</div> -->
 
  <div id="page-wrapper">
 
@@ -188,7 +177,7 @@
 
                             <!-- Trigger/Open The Modal -->
                             
-                            <a id="myBtn" style="margin: 0px 0px 10px 0px;" class="btn btn-info" style="margin-top:-8px;" >Thêm Sản Phẩm</a>
+                            <a id="myBtn"  href="{{route('getadd_new_wareproduct')}}" style="margin: 0px 0px 10px 0px;" class="btn btn-info" style="margin-top:-8px;" >Thêm Sản Phẩm</a>
                             @if(Session::has('thanhcong'))
                                 <div class="alert alert-success" id="alert">{{Session::get('thanhcong')}}</div>
                              @endif
@@ -204,7 +193,7 @@
                                             <th>Gía Nhập</th>
                                             <th>Gía bán</th>
                                             <th style="width:40px">Trạng thái</th>
-                                            <th>Xóa</th>
+                                            <!-- <th>Xóa</th> -->
                                             <th>Sửa</th>
                                         </tr>
                                     </thead>
@@ -234,13 +223,13 @@
                                                 </td>
                                                
                                                     
-                                                 <td>
+                                                <!--  <td>
                                                     <a href="{!! url('dashboard/product/'.$product->id_product.'/remove') !!}" onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa">
                                                         <i class="fa  fa-trash-o  fa-fw"></i>
                                                     </a>            
-                                                </td>
+                                                </td> -->
                                                 <td>
-                                                     <a href="" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Chỉnh sửa">
+                                                     <a href="{!!url('/dashboard/product/update/'.$product->id_product.'') !!}" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Chỉnh sửa">
                                                         <i class="fa fa-pencil fa-fw"></i>
                                                     </a>
                                                 </td>
@@ -259,47 +248,7 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Kitchen Sink
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div id="dataTables-example" >
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Username</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                           
-                                        </tbody>
-                                    </table>
-                                </div>
-                            <!-- /.table-responsive -->
-                            </div>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-6 -->
-               
-                <!-- /.col-lg-6 -->
-            </div>
+            @include('Manager.InformLogin')
             <!-- /.row -->
            
             <!-- /.row -->
@@ -323,60 +272,41 @@ $('#status').on('change',function(e)
     }
 });
 
-
-$('#type').on('change',function(e)
-{
-    console.log(e);
-    var id =  e.target.value;
-
-    //ajax
-    $.get('dashboard/select_typechild/'+id,function(data){
-
-    $('#show_product').empty();
-    $.each(data,function(key,value){
-
-    $('#show_product').append('<option value="'+value.id+'">'+value.name_type+'</option>')
-    });
-    });
-})
 </script>
+<script type="text/javascript">
+
+  $.ajaxSetup({
+    headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    function add_pro()
+            {
+                var route =" {{ route('getadd_new_wareproduct') }} ";
+              var form_data = new FormData($('form#new_form')[0]);
+                $.ajax
+                ({
+                    type:'post',
+                    url:route,
+                    data:form_data,
+                    processData: false,
+                    contentType: false,
+                    success:function(data) 
+                    {
+                        console.log(data);
+                       
+                    }, 
+                });
+                
+                
+            }
+
+</script>
+
 @endsection
 
 
-<script type="text/javascript">
-  $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-    var modal = document.getElementById('myModal');
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-} 
-
-
-</script>
-  
 
 
   

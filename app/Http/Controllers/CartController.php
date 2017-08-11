@@ -19,7 +19,6 @@ class CartController extends Controller
         {
             $oldCart = Session::get('cart');
             $cart = new Cart($oldCart);
-            
             return view('pages.detail_cart',['product_cart'=>$cart->items,'totalPrice'=>$cart->totalPrice,'totalQty'=>$cart->totalQty]);
 
          }
@@ -40,13 +39,13 @@ class CartController extends Controller
 
     public function deleteItemCart($id)
     {
-            $oldCart=Session('cart')?Session::get('cart'):null;
-            $cart=new Cart($oldCart);
-            $cart->removeItem($id);
-            if(count($cart->items)<=0)
-                Session::forget('cart');
-            else
-                Session::put('cart',$cart);
+        $oldCart=Session('cart')?Session::get('cart'):null;
+        $cart=new Cart($oldCart);
+        $cart->removeItem($id);
+        if(count($cart->items)<=0)
+            Session::forget('cart');
+        else
+            Session::put('cart',$cart);
             return json_encode($cart);
       
     }
@@ -64,7 +63,7 @@ class CartController extends Controller
         return json_encode($cart);
     }
 
-    public function riseByOne($id)
+     public function riseByOne($id)
     {
         $oldCart = Session('cart')?Session::get('cart'):null;
         $cart = new Cart($oldCart);

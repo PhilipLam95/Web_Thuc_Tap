@@ -24,17 +24,18 @@ class Cart
 			}
 		}
 		$giohang['qty']++;
-		$giohang['price'] = $item->unit_price * 1;
+		$giohang['price'] += $item->unit_price;
+		$this->items[$id]['item']['price'] = $item->unit_price;
 		$this->items[$id] = $giohang;
 		$this->totalQty++;
-		$this->totalPrice += $giohang['price'];
+		$this->totalPrice += $item->unit_price;
 	}
 	//giảm 1
 	public function reduceByOne($id){ 
 		$this->items[$id]['qty']--;
 		$this->items[$id]['price'] -= $this->items[$id]['item']['price'];
 		$this->totalQty--;
-		$this->totalPrice -= $this->items[$id]['price'];
+		$this->totalPrice -= $this->items[$id]['item']['price'];
 		if($this->items[$id]['qty']<=0){
 			unset($this->items[$id]);
 		}
@@ -47,7 +48,7 @@ class Cart
 		$this->items[$id]['qty']++;
 		$this->items[$id]['price'] += $this->items[$id]['item']['price'];
 		$this->totalQty++;
-		$this->totalPrice += $this->items[$id]['price'];
+		$this->totalPrice += $this->items[$id]['item']['price'];
 		if($this->items[$id]['qty']<=0){
 			unset($this->items[$id]);
 		}
