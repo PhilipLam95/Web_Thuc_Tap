@@ -165,6 +165,43 @@
       </div>
   </div>
 </div>
+<div id='cart_update_info'>
+
+</div>
+<style type="text/css">
+  
+  #cart_update_info { 
+    position:fixed;    
+    top: 50%;
+    left: 50%;    
+    z-index:1000000;
+    margin-left: -8em;
+    width:12em;
+    height:auto;
+    background-color: rgb(128, 225, 189);
+    opacity: 0.9;
+   border-radius: 5px;
+}
+.new_item_added
+{
+   position:fixed;
+    margin:0 auto;
+    padding:2px;
+    max-width: 250px;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f3f3f3;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.32);
+    color: #009900;
+    text-align:center;
+    text-decoration: none;
+/*    font-family: Arial;*/
+    font-size: 20px;
+}
+
+
+</style>
 
 <script type="text/javascript">
  $(document).ready(function () {

@@ -45,66 +45,53 @@
 
 										<div class="section__content">  thông tin khách hàng
 										
-											<div class="form-group" bind-class="{'has-error' : invalidEmail}">
-												<div>
-													<label class="field__input-wrapper" bind-class="{ 'js-is-filled': email }">
+												<div class="form-group" bind-class="{'has-error' : invalidEmail}">
+													<div>
+														<label class="field__input-wrapper" bind-class="{ 'js-is-filled': email }">
+															
+															<input name="email" bind-event-focus="handleFocus(this)" bind-event-blur=" placeholderhandleFieldBlur(this)" class="field__input form-control" id="_email" data-error="Vui lòng nhập email đúng định dạng" required="" value="{{ (Auth::check()) ? Auth::user()->email : '' }}" pattern="^([a-zA-Z0-9_\-\.\+]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" bind="email" type="email" placeholder="Email" {!! (Auth::check()) ? "disabled" : '' !!}>
+														</label>
+													</div>
+													<div class="help-block with-errors">
+													</div>
+												</div>
+												
+												<div class="billing">
+													<div>
+														<div class="form-group">
+															<div class="field__input-wrapper" >
+																
+																<input name="full_name"  class="field__input form-control" id="_billing_address_last_name" data-error="Vui lòng nhập họ tên" required="" bind="billing_address.full_name" type="text" placeholder="Họ tên" value="{{ (Auth::check()) ? Auth::user()->full_name : '' }}" 
+																{!! (Auth::check()) ? "disabled" : '' !!}  >
+															</div>
+															<div class="help-block with-errors"></div>
+														</div>
 														
-														<input name="email" bind-event-focus="handleFocus(this)" bind-event-blur=" placeholderhandleFieldBlur(this)" class="field__input form-control" id="_email" data-error="Vui lòng nhập email đúng định dạng" required="" value="{{ (Auth::check()) ? Auth::user()->email : '' }}" pattern="^([a-zA-Z0-9_\-\.\+]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" bind="email" type="email" placeholder="Email">
-													</label>
-												</div>
-												<div class="help-block with-errors">
-												</div>
-											</div>
-											
-											<div class="billing">
-												<div>
-													<div class="form-group">
-														<div class="field__input-wrapper" >
-															
-															<input name="full_name"  class="field__input form-control" id="_billing_address_last_name" data-error="Vui lòng nhập họ tên" required="" bind="billing_address.full_name" type="text" placeholder="Họ tên" value="{{ (Auth::check()) ? Auth::user()->full_name : '' }}">
+														<div class="form-group">
+															<div class="field__input-wrapper" bind-class="{ 'js-is-filled': billing_address.phone }">
+																
+																</span>
+																<input name="phone"  class="field__input form-control" id="_billing_address_phone" bind="billing_address.phone" type="text" placeholder="Số điền thoại giao hàng"  value="{{ (Auth::check()) ? Auth::user()->phone : '' }}"  > 
+															</div>
+															<div class="help-block with-errors"></div>
 														</div>
-														<div class="help-block with-errors"></div>
-													</div>
-													
-													<div class="form-group">
-														<div class="field__input-wrapper" bind-class="{ 'js-is-filled': billing_address.phone }">
-															
-															</span>
-															<input name="phone"  class="field__input form-control" id="_billing_address_phone" bind="billing_address.phone" type="text" placeholder="Số điền thoại"  value="{{ (Auth::check()) ? Auth::user()->phone : '' }}"  > 
-														</div>
-														<div class="help-block with-errors"></div>
-													</div>
 
-													<div class="form-group">
-														<div class="field__input-wrapper" >
-															
-															<input name="address"  class="field__input form-control" id="_billing_address_last_name" data-error="Vui lòng nhập địa chỉ" required=""  type="text" placeholder="Địa chỉ" value="{{ (Auth::check()) ? Auth::user()->address : '' }}">
+														<div class="form-group">
+															<div class="field__input-wrapper" >
+																
+																<input name="address"  class="field__input form-control" id="_billing_address_last_name" data-error="Vui lòng nhập địa chỉ" required=""  type="text" placeholder="Địa chỉ giao hàng" value="{{ (Auth::check()) ? Auth::user()->address : '' }}">
+															</div>
+															<div class="help-block with-errors"></div>
 														</div>
-														<div class="help-block with-errors"></div>
+														
+														
+														
+														
 													</div>
-													
-													
-													
-													
 												</div>
-											</div>
 										</div>
 
 									</div>
-									<!-- <div class="section pt10">
-										<div class="section__content">
-											<div class="form-group" bind-show="requiresShipping">
-												<div class="checkbox-wrapper">
-													<div class="checkbox__input">
-														<input class="input-checkbox" value="false" name="otherAddress" id="other_address" bind="otherAddress" bind-event-change="changeOtherAddress(this)" type="checkbox">
-													</div>
-													<label class="checkbox__label" for="other_address">
-														Giao hàng đến địa chỉ khác
-													</label>
-												</div>
-											</div>
-										</div>
-									</div> -->
 									<div class="section pt10" bind-show="otherAddress" style="display: none">
 										<div class="section__header">
 											<h2 class="section__title">

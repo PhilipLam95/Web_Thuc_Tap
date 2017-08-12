@@ -52,7 +52,7 @@
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Đơn Đặt hàng</a>
+                                <a href="{{route('bill')}}"><i class="fa fa-edit fa-fw"></i> Đơn Đặt hàng</a>
                             </li>
                             <li>
                                 <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Bình luận khách hàng</a>

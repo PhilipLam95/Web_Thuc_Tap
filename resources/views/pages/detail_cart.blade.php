@@ -195,14 +195,15 @@
 		     					data:{id,id},
 		     					success:function(data)
 		     					{
+		     						console.log(data.items[id]['qty']);
 		     						console.log(data.totalPrice);
 		     						console.log(data.totalQty);
 		     						$('.qty'+id).empty();
 		     						$.each(data.items,function(key,value)
 		     						{
-		     							$('#quantity'+id).attr('value',quantity);
-		     							$('.qty'+id).attr('value',quantity);
-		     							$('.qty'+id).html('Số lượng:&nbsp' + quantity);
+		     							$('#quantity'+id).attr('value',data.items[id]['qty']);
+		     							$('.qty'+id).attr('value',data.items[id]['qty']);
+		     							$('.qty'+id).html('Số lượng:&nbsp' + data.items[id]['qty']);
 		     							
 		     						})
 		     						
@@ -210,7 +211,7 @@
 									$('#simpleCart_quantity').html(data.totalQty);
 									$('.cart-items h2').html('Your Cart(' + data.totalQty +')');
 									$('.total').html(data.totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+ " VND")
-									if(quantity == 1)
+									if(data.items[id]['qty']== 1)
 									{
 
 										$('#left'+id).attr('disabled','disabled');
@@ -250,11 +251,16 @@
 	     				{
 						        $.each(data,function(key,value)
 						        {
+
 						        	  var redisual = value.redisual_quantity;
 
 						        		if(quantity > redisual)
 						        		{
 						        			alert("Số lượng hàng ban mua chúng tôi không cung câp được");
+						        			$('#quantity'+id).attr('value',value.redisual_quantity);
+						     				$('.qty'+id).attr('value',value.redisual_quantity);
+						     				$('.qty'+id).html('Số lượng:&nbsp' + value.redisual_quantity);
+
 						        		}
 						        		else
 						        		{
@@ -262,17 +268,18 @@
 						     					url:route,
 						     					type:'get',
 						     					dataType:'json',
-						     					data:{id,id},
+						     					data:{id,id,
+						     						redisual:redisual,	},
 						     					success:function(data)
 						     					{
 						     						
-
+						     						
 						     						$('.qty'+id).empty();
 						     						$.each(data.items,function(key,value)
 						     						{
-						     							$('#quantity'+id).attr('value',quantity);
-						     							$('.qty'+id).attr('value',quantity);
-						     							$('.qty'+id).html('Số lượng:&nbsp' + quantity);
+						     							$('#quantity'+id).attr('value',data.items[id]['qty']);
+						     							$('.qty'+id).attr('value',data.items[id]['qty']);
+						     							$('.qty'+id).html('Số lượng:&nbsp' + data.items[id]['qty']);
 						 	
 						     						})
 						     						$('#simpleCart_quantity').attr('value',data.totalQty);

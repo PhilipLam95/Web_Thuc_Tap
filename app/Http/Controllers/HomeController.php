@@ -14,6 +14,7 @@ use Session;
 use App\Customer;
 use App\Bill;
 use App\BillDetail;
+use Auth;
 use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller
@@ -85,8 +86,36 @@ class HomeController extends Controller
    public function postCheckout(Request $req)
    {
         $cart = Session::get('cart');
-
-            $customer=Customer::where('email',$req->email)->first();
+            if(Auth::check())
+            {
+                  $customer=Customer::where('email',Auth::user()->email)->first();
+                  if($customer)
+                  {
+                    
+                  }
+                  else
+                  {
+                    $customer= new Customer;
+                    $customer->full_name=Auth::user()->full_name;
+                    $customer->email=Auth::user()->email;
+                    $customer->address=Auth::user()->address;
+                    $customer->phone=Auth::user()->phone;
+                    $customer->save();
+                  }
+                  $bill = new Bill;
+                  $bill->id_user = Auth::user()->id;
+                  $bill->id_customer = $customer->id;
+                  $bill->total = $cart->totalPrice;
+                  $bill->status = 0;
+                  $bill->method = $req->PaymentMethodId;
+                  $bill->Address_shipping = $req->address;
+                  $bill->phone_customer = $req->phone;
+                  $bill->note = $req->note;
+                  $bill->save();
+            }
+            else
+            {
+                  $customer=Customer::where('email',$req->email)->first();
                   if($customer)
                   {
                     
@@ -102,12 +131,16 @@ class HomeController extends Controller
                   }
                   $bill = new Bill;
                   $bill->id_customer = $customer->id;
-                  $bill->status = 1;
+                  $bill->total = $cart->totalPrice;
+                  $bill->status = 0;
                   $bill->method = $req->PaymentMethodId;
+                  $bill->Address_shipping = $req->address;
+                  $bill->phone_customer = $req->phone;
                   $bill->note = $req->note;
                   $bill->save();
 
-                  foreach($cart->items as $key=>$value)
+            }
+            foreach($cart->items as $key=>$value)
                   {
                     $bill_detail = new BillDetail;
                     $bill_detail->id_bill = $bill->id;

@@ -274,6 +274,13 @@ class AdminController extends Controller
         $customers =Customer::all();
         return view('Manager.backend.customer.list',['customers'=>$customers]);
     }
+
+    public function DetailCustomer($id)
+    {
+        $users = Customer::where('id',$id)->first();    
+        $customers= Customer::findDetailBillOfCustomer($id)->get();
+        return view('Manager.backend.customer.detail_customer',['customers'=>$customers,'users'=>$users]);
+    }
     /*public function __construct()
     {
         $this->middleware('auth:admin');

@@ -7,7 +7,7 @@ class Cart
 	public $items = null;
 	public $totalQty = 0;
 	public $totalPrice = 0;
-
+	public $x = 0;
 	public function __construct($oldCart){
 		if($oldCart){
 			$this->items = $oldCart->items;
@@ -16,7 +16,9 @@ class Cart
 		}
 	}
 
-	public function add($item, $id){
+
+	public function add($item, $id)
+	{
 		$giohang = ['qty'=>0, 'price' => 0, 'item' => $item];
 		if($this->items){
 			if(array_key_exists($id, $this->items)){
@@ -29,9 +31,11 @@ class Cart
 		$this->items[$id] = $giohang;
 		$this->totalQty++;
 		$this->totalPrice += $item->unit_price;
+		
 	}
 	//giảm 1
-	public function reduceByOne($id){ 
+	public function reduceByOne($id)
+	{ 
 		$this->items[$id]['qty']--;
 		$this->items[$id]['price'] -= $this->items[$id]['item']['price'];
 		$this->totalQty--;
@@ -62,6 +66,4 @@ class Cart
 		$this->totalPrice -= $this->items[$id]['price'];
 		unset($this->items[$id]);
 	}
-
-
 }

@@ -10,7 +10,7 @@ use App\Product;
 class Import_Product extends Model
 {
     protected $table = "import_product";
-    protected $fillable = ['id','id_product','import_price','import_quantity','created_at'];
+    protected $fillable = ['id','id_product','import_price','import_quantity','redisual_quantity','created_at'];
 
 
     public static function findAllImportPorduct()

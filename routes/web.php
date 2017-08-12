@@ -240,11 +240,17 @@ Route::group(['prefix' => 'dashboard'],function()  //
 
 		//------------------------------------Danh sách Khách hàng------------------------------------// 
 		Route::get('list_customer',['as'=>'customer','uses'=>'AdminController@ListCustomer']);
-		Route::get('admin/add',['as'=>'add_admin','uses'=>'AdminController@getAddAdmin']);
-		Route::post('admin/add',['as'=>'add_admin','uses'=>'AdminController@postAddAdmin']);
-		Route::get('admin/update/{id}',['as'=>'update_admin','uses'=>'AdminController@getUpdateAdmin']);
-		Route::post('admin/update/{id}',['as'=>'update_admin','uses'=>'AdminController@postUpdateAdmin']);
+		Route::get('customer/detail/{id}',['as'=>'detail_customer','uses'=>'AdminController@DetailCustomer']);
 		//--------------------------------------------------------------------------------------------\
+
+		//------------------------------------Danh sách hóa đơn------------------------------------//
+		Route::get('list_bill',['as'=>'bill','uses'=>'BillController@ListBill']);
+		Route::get('bill/{id}',['as'=>'update_bill','uses'=>'BillController@UpdateBill']);
+		Route::post('bill/{id}',['as'=>'update_bill','uses'=>'BillController@postUpdateBill']);
+		Route::get('bill/{id}/approve',['as'=>'post_approve_bill','uses'=>'BillController@ApproveBill']);
+		Route::get('bill/{id}/remove',['as'=>'post_approve_bill','uses'=>'BillController@DeleteBill']);
+		//--------------------------------------------------------------------------------------------\
+
 
 		// Route::get('warehouse/add/id',['as'=>'add_old_wareproduct','uses'=>'ImportController@']);//Nhập thêm số lượng cho sản phẩm cũ
 	});

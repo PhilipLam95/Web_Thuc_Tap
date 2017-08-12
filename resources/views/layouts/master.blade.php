@@ -85,10 +85,9 @@ $('.add-to-cart').click(function()
                            
                           $('#simpleCart_quantity').html(data.totalQty);
                           $('#simpleCart_quantity').attr('value',data.totalQty);
-                          $('.thanhcong'+id).css('font-size','15px');
-                          $('.thanhcong'+id).fadeIn();
-                          $('.thanhcong'+id).html("Đã thêm mặt hàng này vào giỏ hàng");
-                          $('.thanhcong'+id).fadeOut(1000);
+                          $('#cart_update_info').empty();
+            // /* append data/info to cart_update_info bar */
+                        $("#cart_update_info").append("<div id='new_item_added'><i class='glyphicon glyphicon-ok' style='color:green;'></i> Đã thêm sản phẩm nào vào giỏ hàng</div>").fadeIn('fast').delay(1000).fadeOut('fast');
                              
                          /* If shopping cart is still open, items will appear on it at the same time of adding them */
                          
