@@ -29,12 +29,21 @@
 			['as'=>'new_product',
 			'uses'=>'HomeController@getProduct']);
 
+		//---------------------Thông tin khách hàng đăng nhập----------------
+		Route::get('informCustomer',
+			['as'=>'informCus',
+			'uses'=>'HomeController@ViewInform']);
+
 
 		//-------------------Chi tiết sản phẩm-------------------------------
 		Route::get('detail/{id}',
 			['as'=>'detail',
 			'uses'=>'HomeController@getDetail']);
-		//--------------------------------------------------
+		//--------------------------------------------------\\
+
+		Route::get('findPro/{id}',
+			['as'=>'findPro',
+			'uses'=>'CategoryController@findPro']);
 
 		//---------------------Loại sản phẩm con-----------------------------
 		Route::get('type/{id}',
@@ -81,6 +90,13 @@
 		Route::post('signin',
 			['as'=>'signin',
 			'uses'=>'UserController@postSignin']);
+		//---------------------------------------------------------------------------
+
+
+		//--------------------Khách hàng đổi mật khẩu---------------------
+		Route::get('changPasswordCustomer',
+			['as'=>'changePass',
+			'uses'=>'UserController@changPasswordCustomer']);
 		//---------------------------------------------------------------------------
 
 
@@ -247,8 +263,8 @@ Route::group(['prefix' => 'dashboard'],function()  //
 		Route::get('list_bill',['as'=>'bill','uses'=>'BillController@ListBill']);
 		Route::get('bill/{id}',['as'=>'update_bill','uses'=>'BillController@UpdateBill']);
 		Route::post('bill/{id}',['as'=>'update_bill','uses'=>'BillController@postUpdateBill']);
-		Route::get('bill/{id}/approve',['as'=>'post_approve_bill','uses'=>'BillController@ApproveBill']);
-		Route::get('bill/{id}/remove',['as'=>'post_approve_bill','uses'=>'BillController@DeleteBill']);
+		Route::get('bill/{id}/approve',['as'=>'approve_bill','uses'=>'BillController@ApproveBill']);
+		Route::get('bill/{id}/remove',['as'=>'delete_bill','uses'=>'BillController@DeleteBill']);
 		//--------------------------------------------------------------------------------------------\
 
 

@@ -7,7 +7,7 @@ use App\TypeProduct;
 use File;
 use Illuminate\Support\Facades\Input;
 use DB;
-
+use App\Product;
 class CategoryController extends Controller
 {
     //
@@ -153,6 +153,13 @@ class CategoryController extends Controller
 									]);
 			}
 			return redirect()->back()->with('thanhcong','Sửa thành công');
+		}
+
+		public function findPro($id)
+		{	
+			$id= $id;
+			$products = Product::where('id',$id)->get();
+		  	return response()->json($products); 
 		}
 	
 }

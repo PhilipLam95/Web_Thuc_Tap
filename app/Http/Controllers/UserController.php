@@ -153,5 +153,29 @@ class UserController extends Controller
       Auth()->login($user);
       return redirect()->route('index')->with(['flash_level'=>'success','thanhcong'=>"Đăng nhập thành công"]);
     }
+
+    public function changPasswordCustomer(Request $request)
+    {
+      if(Auth::check())
+      {
+        $old_password = $request->old_password;
+        $new_password = $request->new_password;
+
+         
+
+          if(Auth::attempt(['password'=>$old_password,'id'=>Auth::user()->id]))
+              {
+                            User::where('id',Auth::user()->id)
+                                            ->update([ 
+                                                    'password'=>Hash::make($new_password),
+                                                    ]);
+              return redirect()->route('informCus')->with('thanhcong','Đổi mật khẩu thành công');
+              }
+          else
+          {
+            return redirect()->route('informCus')->with('thatbai','Mật khẩu không đúng');
+          }
+      }
+    }
 }
 

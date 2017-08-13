@@ -46,7 +46,7 @@
                                                 <td class="center">{{$customer->phone_customer}}</td>
                                                 <td class="center">{{$customer->name}}</td>
                                                 <td class="center">{{$customer->quantity}}</td>
-                                                <td class="center">{{$customer->sales_price}}</td>
+                                                <td class="center">{{$customer->unit_price}}</td>
                                                 <td class="center">{{$customer->created_at}}</td>
                                         </tr>
                                         @endforeach

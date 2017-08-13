@@ -41,80 +41,55 @@
 		@endif
 	
 	@endfor
+
+
+<div id="compare" style="padding-bottom: 50px;display: none">
+	<div class="button_ss" style="display: block">
+                    <span class="inset-button--wrapper">
+                              <a id="click_sosanh" class="inset-button">So sánh </a>
+                    </span>
+    </div>
+
+    <div id="wr_show_so_sanh" style="display: none;">            
+    		<div class="wr_sp_show_ss">
+                <img src="http://quanglong.com.vn/public/upload/thumbs_resize/iphone-6s-16gb1796832.jpg">
+                <div class="ten_ss"></div>
+                <div class="gia_ss">Giá bán: <a style="color: red;"></a></div>
+                <div class="gia_ss">Mô tả: <a style="color: red;"></a></div>
+                                
+            </div>
+            
+	</div>
+   
+</div>
+
+
+	
+	
 	<div class="new">
 		   <div class="container">
 		     <h3 style="color:#4d1a00">CÁC SẢN PHẨM MỚI</h3>
 		     <div class="new-products">
-			@for($j=0;$j<count($products);$j++)
-				@if($j==0)
+			@foreach ($products as $product)
 			     <div class="new-items">
 			    
-						 <div class="item{{$products[$j]->id}}">
-							 <a href="{{ url('/detail/'.$products[$j]->id) }}"><img src="images/{{$products[$j]->image}}" alt=""></a>
+						 <div class="item{{$product->id}}">
+							 <a href="{{ url('/detail/'.$product->id) }}"><img src="images/{{$product->image}}" alt=""></a>
 							 <div class="item-info">
-								 <h4><a href="{{ url('/detail/'.$products[$j]->id) }}">{{$products[$j]->name}}</a></h4>
-								 <span>ID: {{$products[$j]->id}}</span>
-								 <a href="{{ url('/detail/'.$products[$j]->id) }}" style="background: url('background/color.jpg')">Chi tiết</a>
+								 <h4><a href="{{ url('/detail/'.$product->id) }}">{{$product->name}}</a></h4>
+								 <span>ID: {{$product->id}}</span>
+								 <a href="{{ url('/detail/'.$product->id) }}" style="background: url('background/color.jpg')">Chi tiết</a>
+								 <a  class="sosanh" style="background: url('background/color.jpg')" value="{{$product->id}}" >So sánh</a>
 							 </div>
 						 </div>
-					@php $j++ @endphp	
-						 <div class="item{{$products[$j]->id}}">
-							 <a href="{{ url('/detail/'.$products[$j]->id) }}"><img src="images/{{$products[$j]->image}}" alt=""></a>
-							 <div class="item-info">
-								 <h4><a href="{{ url('/detail/'.$products[$j]->id) }}">{{$products[$j]->name}}</a></h4>
-								 <span>ID: {{$products[$j]->id}}</span>
-								 <a  style="background: url('background/color.jpg')" href="{{ url('/detail/'.$products[$j]->id) }}">Chi tiết</a>
-							 </div>
-						 </div>					
+				
 				 </div>
-				@endif
-				@if($j==2)
-				<div class="new-items new_middle">
-					 <div class="item{{$products[$j]->id}}">			 
-						 <div class="item-info2">
-							 <h4><a href="{{ url('/detail/'.$products[$j]->id) }}">{{$products[$j]->name}}</a></h4>
-							 <span>ID: {{$products[$j]->id}}</span>
-							<a href="{{ url('/detail/'.$products[$j]->id) }}" style="background: url('background/color.jpg')">Chi tiết</a>
-						 </div>
-						 <a href="{{ url('/detail/'.$products[$j]->id) }}" ><img src="images/{{$products[$j]->image}}" alt=""></a>
-					 </div>
-					 @php $j++ @endphp
-					 <div class="item{{$products[$j]->id}}">	
-						 <a href="{{ url('/detail/'.$products[$j]->id) }}"><img src="images/{{$products[$j]->image}}" alt=""></a>
-						 <div class="item-info5">
-							 <h4><a href="{{ url('/detail/'.$products[$j]->id) }}">{{$products[$j]->name}}</a></h4>
-							 <span>ID: {{$products[$j]->id}}</span>
-							 <a href="{{ url('/detail/'.$products[$j]->id) }}" style="background: url('background/color.jpg')">Chi tiết</a>
-						 </div>	
-					 </div>
-		 		</div>
-		 		@endif
-		 		@if($j==4)
-		 		<div class="new-items new_last">
-					 <div class="item{{$products[$j]->id}}">	
-						 <a href="{{ url('/detail/'.$products[$j]->id) }}"><img src="images/{{$products[$j]->image}}" alt=""></a>
-						 <div class="item-info3">
-							 <h4><a href="{{ url('/detail/'.$products[$j]->id) }}">{{$products[$j]->name}}</a></h4>
-							 <span>ID: {{$products[$j]->id}}</span>
-							 <a href="{{ url('/detail/'.$products[$j]->id) }}" style="background: url('background/color.jpg')">Chi tiết</a>
-						 </div>			 
-					 </div>
-					  @php $j++ @endphp
-					 <div class="item{{$products[$j]->id}}">	
-						 <a href="{{ url('/detail/'.$products[$j]->id) }}"><img src="images/{{$products[$j]->image}}" alt=""></a>
-						 <div class="item-info6">
-							 <h4><a href="{{ url('/detail/'.$products[$j]->id) }}">{{$products[$j]->name}}</a></h4>
-							 <span>ID: {{$products[$j]->id}}</span>
-							 <a href="{{ url('/detail/'.$products[$j]->id) }}" style="background: url('background/color.jpg')">Chi tiết</a>
-						 </div>
-						 				 
-					 </div>
-		 		</div>
-				@endif
+				
+				
 
 			
 			     
-			@endfor	
+			@endforeach
 			   
 			        
 			     
@@ -163,7 +138,7 @@
 		       <ul id="flexiselDemo1">
 		       @foreach( $best_views as $best_view)
 		         <li>
-		           <a href="products.html"><img src="images/{{$best_view->image}}" alt=""/></a> 
+		           <a href="{{route('detail',$best_view->id_product)}}"><img src="images/{{$best_view->image}}" alt=""/></a> 
 		           <h4><a href="products.html">{{ $best_view->name}}</a></h4> 
 		           <p>ID: {{$best_view->id_product}}</p>
 		           	@if($best_view->unit_price != 0)
@@ -210,14 +185,58 @@
 		   </div>
 		</div>
 <form></form>
+<
 
 <script type="text/javascript">
+
+$('#click_sosanh').click(function()
+{
+	
+})
+
+$('.sosanh').click(function()
+{
+	$('#compare').css('display','block');
+	var id = $(this).attr('value');
+	var route = "{{route('findPro','id_sp')}}";
+	route = route.replace('id_sp',id);
+	alert(route);
+	  $.ajax({
+             	url:route,
+                type: "get",
+				dataType:"json",
+				data:{id,id},
+				success:function(data)
+				{
+					
+					document.cookie = data[0].id;
+					$('#compare').append('<div class="wr_sp_ss" style="float: left"> <img src="images/'+data[0].image+'"  width="70" height= "70" ><a id= "'+data[0].id+'" class="del_sosanh">X</a></div>');
+				
+				}
+             });
+	
+});
+
+
+
+
 $(".add-to-cart").hover(
     function () {
         
          $(this).css("cursor","pointer")
         
     }, 
+);
+
+$(".sosanh").hover(
+    function () {
+        $(this).css("cursor","pointer")
+        
+    }, 
+
+    function () {
+        $(this).find("span:last").remove();
+    }
 );
 
 

@@ -151,12 +151,16 @@ class HomeController extends Controller
                   }
         Session::forget('cart');
         return  redirect()->back()->with('thanhcong',"Đặt hàng thành công");
-     
-            
-            
-       
    }
 
+   public function ViewInform()
+   {
+    if(Auth::check())
+    {
+      $customers= Customer::findDetailBillOfUser(Auth::user()->id)->get();
+      return view('pages.informCustomer',['customers'=>$customers]);
+    }
+   }
 
 
 }

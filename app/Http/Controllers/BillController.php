@@ -27,15 +27,25 @@ class BillController extends Controller
 
             $unapproves = DB::table('bills')->join('customer','bills.id_customer','=','customer.id')
             ->select('id_customer','full_name','email','method','note','bills.created_at','status','bills.id','Address_shipping','phone_customer',
-               'bills.total' )->where('status',0)
+               'bills.total' )->where('status',0)->orderBy('id','desc')
             ->get();
 
             $approves = DB::table('bills')->join('customer','bills.id_customer','=','customer.id')
             ->select('id_customer','full_name','email','method','note','bills.created_at','status','bills.id','Address_shipping','phone_customer',
-               'bills.total' )->where('status',1)
+               'bills.total' )->where('status',1)->orderBy('id','desc')
+            ->get();
+
+            $delivered = DB::table('bills')->join('customer','bills.id_customer','=','customer.id')
+            ->select('id_customer','full_name','email','method','note','bills.created_at','status','bills.id','Address_shipping','phone_customer',
+               'bills.total' )->where('status',3)->orderBy('id','desc')
+            ->get();
+
+             $bill_cancels = DB::table('bills')->join('customer','bills.id_customer','=','customer.id')
+            ->select('id_customer','full_name','email','method','note','bills.created_at','status','bills.id','Address_shipping','phone_customer',
+               'bills.total' )->where('status',4)->orderBy('id','desc')
             ->get();
         	
-        	return view('Manager.backend.bill.list',['bills'=>$bills, 'unapproves'=>$unapproves,'approves'=>$approves]);
+        	return view('Manager.backend.bill.list',['bills'=>$bills, 'unapproves'=>$unapproves,'approves'=>$approves,'delivered'=>$delivered,'bill_cancels'=>$bill_cancels]);
         }
 
         public function UpdateBill($id)
@@ -138,6 +148,9 @@ class BillController extends Controller
             return redirect()->route('bill')->with('thanhcong','xác nhận hóa đơn thành công');
         }
 
+
+
+        
         public function DeleteBill($id)
         {
             Bill::where('id',$id)->delete();

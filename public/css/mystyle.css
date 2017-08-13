@@ -104,3 +104,218 @@
 	 50% { color: #996600;  }
 	 100% { color: #661a00;  } 
  } 
+
+ <style type="text/css">
+		#wr_sosanh {
+    width: 1175px;
+    height: 100px;
+    border-left: #E0E0E0 solid 1px;
+    float: left;
+    background: white;
+}
+#wr_show_so_sanh{
+    width: 1326px;
+    height: auto;
+    float: left;
+    background: white;
+    border-top: silver dashed 1px;
+    position: relative;
+    display: none;
+}
+#wr_content_so_sanh{
+    width: 1326px;
+    display: none;
+    height: auto;
+    margin-left: 12px;
+    float: left;
+    background: white;
+    border-right: #E0E0E0 solid 1px;
+    border-left: #E0E0E0 solid 1px;
+    border-bottom: #E0E0E0 solid 1px;
+}
+.wr_sp_ss{
+    width: 70px;
+    height: 70px;
+    margin-top: 10px;
+    float: left;
+    margin-right: 20px;
+    margin-left: 20px;
+    position: relative;
+}
+.wr_sp_ss:before{
+    content: "VS";
+    position: absolute;
+    margin-left: 70px;
+    margin-top: 20px;
+    border: #838383 solid 1px;
+    width: 25px;
+    height: 25px;
+    color: gray;
+    text-align: center;
+    line-height: 25px;
+    border-radius: 25px;
+}
+.del_sosanh{
+    position: absolute;
+    top: 75px;
+    left: 30px;
+    background: white;
+    margin-top: -px;
+    width: 10px;
+    height: 10px;
+    font-size: 10px;
+    color: red;
+    text-align: center;
+    line-height: 10px;
+    cursor: pointer;
+    border: red solid 1px;
+}
+.wr_sp_ss:after:hover{
+    color: red;
+}
+.wr_sp_ss:last-child:before{
+    display: none;
+}
+.button_ss{
+    width: 150px;
+    text-align: center;
+    line-height: 80px;
+    color: white;
+    /* background: #0080C0; */
+    height: 101px;
+    /* margin-top: 50px; */
+    display: none;
+    float: left;
+}
+.inset-button--wrapper {
+display: block;
+width: 120px;
+margin-top: 25px;
+margin-left: 6px;
+height: 36px;
+padding: 10px 9px;
+border-radius: 27px;
+background-color: #f2f2f2;
+background: linear-gradient(to bottom, #ced1d3 0%,#fcfdfe 100%);
+box-shadow: inset 0 1px 5px rgba(0,0,0,0.1), 0 1px 0 #fff, 0 -1px 0 #adadad;
+cursor: pointer;
+}
+a.inset-button {
+display: block;
+width: 120px;
+height: 36px;
+border-radius: 50px;
+background: #fafafa;
+box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 0 0 1px #b2b2b2, 0 1px 1px rgba(0,0,0,0.7);
+color: #414141;
+font-size: 14px;
+text-align: center;
+text-decoration: none;
+text-shadow: 0 1px 0 #fff;
+line-height: 36px;
+transition: all 0.2s ease;
+}
+.wr_sp_show_ss{
+width: 330px;
+float: left;
+border-right: #E1E1E1 solid 1px;
+height: 600px;
+position: relative;
+padding-bottom: 20px;
+padding-top: 20px;
+}
+.wr_sp_show_ss:last-child{
+width: 330px;
+float: left;
+border-right: #E1E1E1 solid 0px;
+border-bottom: #E1E1E1 solid 0px;
+height: 600px;
+position: relative;
+padding-bottom: 20px;
+padding-top: 20px;
+}
+.wr_sp_show_ss img{
+    max-width: 100%;
+    height: 300px;
+}
+.ten_ss{
+    width: 85%;
+    margin-left: 20px;
+    float: left;
+    font-weight: bold;
+    font-size: 16px;
+}
+.gia_ss{
+    width: 85%;
+    margin-left: 20px;
+    color: #575757;
+    height: 25px;
+    float: left;
+    line-height: 25px;
+    font-size: 14px;
+    border-bottom:silver dashed 1px;
+}
+.cau_hinh_ss{
+    width: 85%;
+    margin-left: 20px;
+    color: #575757;
+    float: left;
+    font-size: 14px;
+    margin-top: 10px;
+}
+.xem_ss{
+    width: 85%;
+    margin-left: 20px;
+    color: #0080C0;
+    float: left;
+    display: block;
+    height: 25px;
+    font-size: 14px;
+    line-height: 25px;
+    border-bottom: silver dashed 1px;
+}
+#close_sosanh{
+    width: 100%;
+    float: left;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    color: #606060;
+    border-top: silver solid 1px ;
+    cursor: pointer;
+    display: none;
+}
+#close_sosanh:hover{
+    width: 100%;
+    float: left;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    background: #DBDBDB;
+    border-top: silver solid 1px ;
+    cursor: pointer;
+    color: red;
+}
+#content_show_ss{
+    float: left;
+    width: 100%;
+}
+#loading{
+    position: fixed;
+    width: 200px;
+    height: 100px;
+    background: #000 url(loadajax.gif) no-repeat 50% 4px;
+    bottom: 20px;
+    color: #fff;
+    text-align: center;
+    line-height: 166px;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0.7;
+    border-radius: 5px;
+    filter: alpha(opacity=70);
+    font-size:12px;
+    text-shadow:none;
+    z-index: 9999;
+    display: none;
+}

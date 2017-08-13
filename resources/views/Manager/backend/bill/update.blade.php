@@ -56,7 +56,7 @@
                        
                           <option value='1'  {{ $bill->status == 1 ? 'selected' :''}} >Đã xác nhận</option>";
                      
-                          <option value='3'  {{ $bill->status == 3 ? 'selected' :''}}>Đã hủy</option>";
+                          <option value='4'  {{ $bill->status == 4 ? 'selected' :''}}>Hủy Đơn</option>";
                           @endif
 
                           @if($bill->status ==1)
@@ -77,9 +77,7 @@
                           @endif
 
                           @if($bill->status ==4)
-                          <option value='4'  {{ $bill->status == 4 ? 'selected' :''}}>Đã hủy</option>";
-
-
+                          <option value='4'  {{ $bill->status == 4 ? 'selected' :''}}>Hủy đơn</option>";
                           @endif                  
                       </select>
                   </div>
