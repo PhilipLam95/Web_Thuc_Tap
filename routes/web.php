@@ -17,6 +17,9 @@
 		Route::get('contact',
 			['as'=>'contact',
 			'uses'=>'HomeController@getContact']);
+		Route::post('postContact',
+			['as'=>'postContact',
+			'uses'=>'HomeController@postContact']);
 		//--------------------------------------------------
 
 		//--------------------Gioi thiệu------------------------------
@@ -164,6 +167,12 @@
 			'uses'=>'HomeController@postCheckout']);
 		//---------------------------------------------------------------------------
 
+		//-------------------------------news----------------------------------------
+		Route::get('news',
+			['as'=>'news',
+			'uses'=>'HomeController@getnews']);
+		//---------------------------------------------------------------------------
+
 //------------------------------------------------------------------------------------------------------------------------
 Route::group(['prefix' => 'dashboard'],function()  // 
 {
@@ -267,6 +276,10 @@ Route::group(['prefix' => 'dashboard'],function()  //
 		Route::get('bill/{id}/remove',['as'=>'delete_bill','uses'=>'BillController@DeleteBill']);
 		//--------------------------------------------------------------------------------------------\
 
+
+		//------------------------------------Danh sách thống kệ------------------------------------//
+		Route::get('list_statistical',['as'=>'statistical','uses'=>'AdminController@List_statistical']);
+		//--------------------------------------------------------------------------------------------\
 
 		// Route::get('warehouse/add/id',['as'=>'add_old_wareproduct','uses'=>'ImportController@']);//Nhập thêm số lượng cho sản phẩm cũ
 	});

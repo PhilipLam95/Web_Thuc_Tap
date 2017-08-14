@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use Hash;
 use App\Customer;
-
+use App\Import_Product;
+use App\Product;
 class AdminController extends Controller
 {
     //
@@ -280,6 +281,19 @@ class AdminController extends Controller
         $users = Customer::where('id',$id)->first();    
         $customers= Customer::findDetailBillOfCustomer($id)->get();
         return view('Manager.backend.customer.detail_customer',['customers'=>$customers,'users'=>$users]);
+    }
+
+
+    public function List_statistical()
+    {
+        $import_products = Import_Product::finddAll()->get();
+        $products = Product::findAll()->get();
+        $best_product = Product::findProDuctBestSale()->limit(6)->get();
+        $counts =Product::CoungMoneyproduct()->get();
+        $totals = Product::CountTotalMoneyProduct()->first();
+        $ends = Import_Product::where('redisual_quantity','=','0')->get();
+
+        return view('Manager.backend.statistical.list',['import_products'=>$import_products,'products'=>$products,'best_product'=>$best_product,'counts'=>$counts,'totals'=>$totals,'ends'=>$ends]);
     }
     /*public function __construct()
     {

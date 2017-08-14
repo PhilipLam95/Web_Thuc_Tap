@@ -19,6 +19,11 @@ class Product extends Model
         return $products;
     }
 
+    public static function findAll()// tìm so luong sản phẩm còn theo id cho giỏ hàng
+    {
+        $products = DB::table('products')->orderBy('id','desc');
+        return $products;
+    }
 
     public static function getProducts()  // lấy sản phẩm  mới 
     {
@@ -26,6 +31,12 @@ class Product extends Model
         return $products;
     }
 
+    public static function CoungMoneyproduct()
+    {
+        $products = DB::table('products')->leftJoin('import_product','products.id','=','import_product.id_product')
+                ->orderBy('products.id','desc');
+        return $products;
+    }
     
     public static function findAllProduct()
     {
@@ -221,6 +232,14 @@ class Product extends Model
                                         ->join('category','products.id_type','=','category.id')
                                         ->where('products.id',$id);
         return $product;
+    }
+
+    public static function CountTotalMoneyProduct()
+    {
+         $totals = DB::table('products')
+                    ->join('import_product', 'products.id', '=', 'import_product.id_product')
+                    ->select(DB::raw('sum(unit_price*sale_quantity) as saleTotal,sum(import_price*import_quantity) as importTotal'));
+        return $totals;
     }
     
 

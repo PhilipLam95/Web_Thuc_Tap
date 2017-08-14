@@ -71,7 +71,7 @@
 															<div class="field__input-wrapper" bind-class="{ 'js-is-filled': billing_address.phone }">
 																
 																</span>
-																<input name="phone"  class="field__input form-control" id="_billing_address_phone" bind="billing_address.phone" type="text" placeholder="Số điền thoại giao hàng"  value="{{ (Auth::check()) ? Auth::user()->phone : '' }}"  > 
+																<input name="phone"  class="field__input form-control" id="_billing_address_phone" bind="billing_address.phone" type="text" placeholder="Số điền thoại giao hàng" pattern="[0-9]{10,11}" maxlength='10' title=" nhâp số điện thoại 10 hoặc 11 chữ số" value="{{ (Auth::check()) ? Auth::user()->phone : '' }}"  > 
 															</div>
 															<div class="help-block with-errors"></div>
 														</div>

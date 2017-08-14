@@ -13,6 +13,11 @@ class Import_Product extends Model
     protected $fillable = ['id','id_product','import_price','import_quantity','redisual_quantity','created_at'];
 
 
+     public static function  finddAll()
+    {
+        $import = DB::table('import_product')->orderBy('id_product','desc');
+        return $import;
+    }
     public static function findAllImportPorduct()
     {
     	$import = DB::table('import_product')->orderBy('id','desc');

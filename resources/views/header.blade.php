@@ -28,9 +28,9 @@
       <div class="header_top-sec">
         <div class="top_right">
           <ul>
-            <li><a href="#">help</a></li>|
-            <li><a href="{{route('contact')}}">Contact</a></li>|
-            <li><a href="login.html">Track Order</a></li>
+            <li><a href="#">Hỗ trợ</a></li>|
+            <li><a href="{{route('contact')}}">Liên hệ</a></li>|
+ 
           </ul>
         </div>
         <div class="top_left">
@@ -41,7 +41,7 @@
             <li class="top_link"><a href="{{route('informCus')}}">Chào bạn: {{Auth::user()->full_name}}</a></li>|
             <li class="top_link"><a href="{{route('logout')}}">Đăng xuất</a></li>
             @else 
-            <li class="top_link"><a href="{{route('register')}}">Sign Up</a></li> 
+            <li class="top_link"><a href="{{route('register')}}">Đăng ký</a></li> 
             @endif
          
               
@@ -63,15 +63,15 @@
   <div class="header_top">
      <div class="container">
        <div class="logo">
-        <a href="index.html"><img src="images/logo.png" alt=""/></a>       
+        <a href="{{route('news')}}"><img src="images/logo.jpg" height="129" width="55" alt=""/></a>       
        </div>
        <div class="header_right"> 
          <div class="login">
          @if(Auth::check())
          
-           <a href="{{ route('logout')}}" >LOGOUT</a>
+           <a href="{{ route('logout')}}" >Đăng xuất</a>
         @else
-           <a href="{{route('signin')}}" >LOGIN</a>
+           <a href="{{route('signin')}}" >Đăng nhập</a>
           
         @endif 
          </div>
@@ -87,7 +87,7 @@
               @endif
               </a> 
               <div class="dropdown-content">
-                <p >This is cart of you. Click to view detail cart</p>
+                <p >Nhấp để xem giỏ hàng của bạn</p>
               </div>
           </div>
                  <!-- p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p> -->
@@ -144,7 +144,7 @@
               </div>
             </div>
           </li>       
-          <li class="grid4"><a class="color5" href="#">TIN TỨCccccccs</a>
+          <li class="grid4"><a class="color5" href="{{route('news')}}">TIN TỨC</a>
           </li>
           <li class="grid5"><a class="color6" href="{{route('introduce')}}">GIỚI THIỆU</a>
           </li>       

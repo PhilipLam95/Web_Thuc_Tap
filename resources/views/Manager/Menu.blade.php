@@ -70,9 +70,10 @@
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Thống kê</a>
+                                <a href=" {{route('statistical')}}"><i class="fa fa-edit fa-fw"></i> Thống kê</a>
                             </li>
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->
+
     </div>

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Quản Lý STUDIO CUNG CẤP ĐỒ GỖ</title>
     <base href="{{asset('http://localhost/Web_Thuc_Tap/public/') }}"/>
     <!-- Bootstrap Core CSS -->
     <link href="admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -50,7 +50,7 @@
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
               
-                <a class="navbar-brand" href="index.html"> Studio Wev Admin</a>
+                <a class="navbar-brand" href="index.html"> TRANG QUẢN TRỊ</a>
             </div>
          
             <ul class="nav navbar-top-links navbar-right">

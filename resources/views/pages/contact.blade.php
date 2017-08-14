@@ -5,37 +5,43 @@
 <div class="contact">
 	 <div class="container">
 		 <ol class="breadcrumb">
-		  <li><a href="{{route('index')}}">Home</a></li>
-		  <li class="active">Contact</li>
+		  <li><a href="{{route('index')}}">Trang chủ</a></li>
+		  <li class="active">Liên hệ</li>
 		 </ol>
 		 <div class="contact-head">
-		 	 <h2>CONTACT</h2>
-			  <form>
+		 	 <h2>Liên hệ</h2>
+		 	  <tbody>
+                	@if (Session::has('flash_message'))
+                        <div class="alert alert-{!! Session::get('flash_level') !!}">
+                            {!! Session::get('flash_message') !!}
+                        </div>
+          			@endif  
+			  <form action="{{route('postContact')}}" method="post">
+			  {!! csrf_field() !!}
 				  <div class="col-md-6 contact-left">
-						<input placeholder="Name" required="" type="text">
-						<input placeholder="E-mail" required="" type="text">
-						<input placeholder="Phone" required="" type="text">
+						<input placeholder="Name"  name ="full_name" required="" type="text" required value="{{ Auth::check() ? 'Auth::user()->full_name' :''}}">
+						<input placeholder="E-mail" name="email" type="text"  pattern="[a-z0-9._%+-]+@[gmail]+\.[com]{2,63}$" required value="{{ Auth::check() ? 'Auth::user()->email' :''}}">
+						<input placeholder="Phone" name ="phone" required="" type="text" pattern="[0-9]{10,11}" maxlength='10' title=" nhâp số điện thoại 10 hoặc 11 chữ số" required="" value="{{ Auth::check() ? 'Auth::user()->phone' :''}}">
 				 </div>
 				 <div class="col-md-6 contact-right">
-						 <textarea placeholder="Message"></textarea>
+						 <textarea placeholder="Message" name="message" ></textarea>
 						 <input value="SEND" type="submit">
 				 </div>
 				 <div class="clearfix"></div>
 			 </form>
 		 </div>
 		 <div class="address">
-			 <h3>Our Locations</h3>
+			 <h3>Chi nhánh của chúng tôi</h3>
 			 <div class="locations">				 
 				  <ul>
 					 <li><span></span></li>					 					
 					 <li>
 						 <div class="address-info">	
-							 <h4>New York, Washington</h4>
-							 <p>10-765 MD-Road</p>
-							 <p>Washington, DC, United States,</p>
-							 <p>Phone: 123 456 7890</p>
-							 <p>Mail: <a href="mailto:info@example.com">info(at)example.com</a></p>
-							 <h5><a href="">Visit on Google Maps &gt;&gt;</a></h5>	
+							 <h4>Việt Nam, TP.HCM</h4>
+							 <p>A75/6D/20 BẠCH ĐẰNG</p>
+							 <p>Phone: 0985668449</p>
+							 <p>Mail: <a href="mailto:info@example.com">drakaabc456@gmail.com</a></p>
+							 <h5><a href=""> Vị trí: google map &gt;&gt;</a></h5>	
 						 </div>
 					 </li>				
 				  </ul>	
@@ -43,15 +49,14 @@
 					 <li><span></span></li>					 					
 					 <li>
 						 <div class="address-info">	
-							 <h4>London, UK</h4>
-							 <p>10-765 MD-Road</p>
-							 <p>Lorem ipsum, domon sit, UK,</p>
-							 <p>Phone: 123 456 7890</p>
-							 <p>Mail: <a href="mailto:info@example.com">info(at)example.com</a></p>
-							 <h5><a href="">Visit on Google Maps &gt;&gt;</a></h5>	
+							 <h4>Việt Nam, TP.HCM</h4>
+							 <p>A75/6D/20 BẠCH ĐẰNG</p>
+							 <p>Phone: 0985668449</p>
+							 <p>Mail: <a href="mailto:info@example.com">drakaabc456@gmail.com</a></p>
+							 <h5><a href="">Vị trí: google map  &gt;&gt;</a></h5>	
 						 </div>
 					 </li>				
-				  </ul>		
+				  </ul>	
 			 </div>			 
 		 </div>
 		 <div class="contact-map">

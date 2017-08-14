@@ -14,8 +14,12 @@ use Session;
 use App\Customer;
 use App\Bill;
 use App\BillDetail;
+use App\News;
+use App\Support;
 use Auth;
 use Illuminate\Support\Facades\Input;
+use DB;
+use Mail;
 
 class HomeController extends Controller
 {
@@ -31,7 +35,25 @@ class HomeController extends Controller
   }
   public function getContact()
   {
+
     return view('pages.contact');
+  }
+
+  public function postContact(Request $req)
+  {
+    $name = $req->full_name;
+    $phone = $req->phone;
+    $email = $req->email;
+    $message = $req->message;
+    
+      $support = new Support;
+      $support->full_name = $name;
+      $support->email = $email;
+      $support->phone = $phone;
+      $support->content = $message;
+      $support->save();
+
+    return redirect()->back()->with(['flash_level'=>'success','flash_message'=>'Chúng tôi đã nhận được liên hệ của bạn. Chúng tôi sẽ phẩn hồi bạn nhanh nhất có thể.']);
   }
    
    public function getIntroduce()
@@ -96,6 +118,7 @@ class HomeController extends Controller
                   else
                   {
                     $customer= new Customer;
+                    $customer->id_user = Auth::user()->id;
                     $customer->full_name=Auth::user()->full_name;
                     $customer->email=Auth::user()->email;
                     $customer->address=Auth::user()->address;
@@ -103,7 +126,6 @@ class HomeController extends Controller
                     $customer->save();
                   }
                   $bill = new Bill;
-                  $bill->id_user = Auth::user()->id;
                   $bill->id_customer = $customer->id;
                   $bill->total = $cart->totalPrice;
                   $bill->status = 0;
@@ -149,8 +171,26 @@ class HomeController extends Controller
                     $bill_detail->sales_price = $value['price'];
                     $bill_detail->save();
                   }
+        // $sends = DB::table('products')->join('bill_detail','products.id','=','bill_detail.id_product')
+        //         ->join('bills','bills.id','=','bill_detail.id_bill')
+        //         ->join('customer','customer.id','=','bills.id_customer')
+        //         ->where('id_bill',$bill->id)->get();
+
+        //  Mail::send('pages.mail',['nguoidung'=>$sends], function ($message) use($sends)
+        // {
+        //     $message->from('drakaabc456@gmail.com', "StudiO Noi that gô");
+        //     $message->to($sends->email,$sends->full_name,$sends->total);
+        //     $message->subject('Xác nhận tài khoản');
+        // });    
+                  
         Session::forget('cart');
         return  redirect()->back()->with('thanhcong',"Đặt hàng thành công");
+   }
+
+   public function getnews()
+   {
+    $news= News::ShowNewPost()->get();
+     return view('pages.news',['news'=>$news]);
    }
 
    public function ViewInform()
